@@ -55,7 +55,7 @@ assessed during a surveillance visit.
 
 | Months | Work | Handbook chapters |
 |---|---|---|
-| 1 | Gap analysis against the standard; plan; appoint a quality manager; decide the scope | [5](../structure/5-structure.md), [8.1](../management/8-1-options.md) |
+| 1 | [Gap analysis](../tools/gap-analysis.md) against the standard; plan; appoint a quality manager; decide the scope | [5](../structure/5-structure.md), [8.1](../management/8-1-options.md) |
 | 1–3 | Quality manual, key procedures, document control, records | [8.2](../management/8-2-documentation.md)–[8.4](../management/8-4-records.md) |
 | 1–3 | Impartiality and confidentiality: policy, risk register, agreements | [4.1](../general/4-1-impartiality.md), [4.2](../general/4-2-confidentiality.md) |
 | 2–5 | Equipment register, calibrations, traceability, suppliers | [6.4](../resources/6-4-equipment.md)–[6.6](../resources/6-6-external-providers.md) |
@@ -73,6 +73,10 @@ can give the project real time. Larger scopes, or labs starting with no
 validation data, need longer.
 
 ## What helps most
+
+- **Measure where you stand.** Run the [gap analysis](../tools/gap-analysis.md)
+  at the start and again every couple of months; the to-do list becomes your
+  project plan.
 
 - **Start QC and PT early.** You need months of data to set QC limits,
   estimate uncertainty and show the assessor your results are under

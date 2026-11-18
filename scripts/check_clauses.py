@@ -76,6 +76,15 @@ def main() -> int:
         if chapter not in nav:
             errors.append(f"{chapter}: not in the mkdocs.yml nav")
 
+    questions = yaml.safe_load((ROOT / "data" / "gap_questions.yml").read_text(encoding="utf-8")) or {}
+    numbers = {str(c["number"]) for c in data["clauses"]}
+    for num in sorted(numbers):
+        n = len(questions.get(num) or [])
+        if not 3 <= n <= 8:
+            errors.append(f"gap_questions.yml: clause {num} has {n} questions (3 to 8 expected)")
+    for num in sorted(set(map(str, questions)) - numbers):
+        errors.append(f"gap_questions.yml: clause {num} is not in clauses.yml")
+
     for folder in CLAUSE_FOLDERS:
         for path in sorted((DOCS / folder).glob("*.md")):
             rel = path.relative_to(DOCS).as_posix()

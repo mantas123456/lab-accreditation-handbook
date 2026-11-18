@@ -16,15 +16,18 @@ mistakes that most often become findings.
 
 <div class="entry-buttons" markdown>
 [Preparing for first accreditation](start-here/journey.md){ .md-button .md-button--primary }
+[Check your readiness](tools/gap-analysis.md){ .md-button }
 [Already accredited](process/7-7-validity-of-results.md){ .md-button }
 [Looking for a template](template-library/index.md){ .md-button }
 </div>
 
 ## What is written so far
 
-This is version 0.4. **Every clause of the standard has a chapter**, and
-there are **24 editable [templates](template-library/index.md)** in Word and
-Excel, from an uncertainty budget to a management review agenda. Chapters run from
+This is version 0.5. **Every clause of the standard has a chapter**, there
+are **24 editable [templates](template-library/index.md)** in Word and Excel,
+and two free browser tools: a [gap analysis](tools/gap-analysis.md) that
+scores your readiness clause by clause, and an
+[internal audit planner](tools/audit-planner.md). Chapters run from
 [4.1 Impartiality](general/4-1-impartiality.md) to
 [8.9 Management review](management/8-9-management-review.md), plus the
 [Start here](start-here/index.md) guides. All chapters are drafts until they

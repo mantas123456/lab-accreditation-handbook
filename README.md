@@ -15,9 +15,10 @@ Calculations link to [labqc](https://github.com/mantas123456/lab-quality-toolkit
 a Python library and web app for uncertainty budgets, method validation,
 PT scores and QC charts.
 
-**Status:** version 0.4. Every clause of ISO/IEC 17025:2017 (4.1 to 8.9)
-has a draft chapter, plus the Start here guides and a pack of 24 editable
-Word and Excel templates. Interactive tools come next. See the [roadmap](https://mantas123456.github.io/lab-accreditation-handbook/roadmap/).
+**Status:** version 0.5. Every clause of ISO/IEC 17025:2017 (4.1 to 8.9)
+has a draft chapter, plus the Start here guides, a pack of 24 editable Word
+and Excel templates, and two browser tools: a gap analysis and an internal
+audit planner. Next: review by practitioners for 1.0. See the [roadmap](https://mantas123456.github.io/lab-accreditation-handbook/roadmap/).
 
 > Not official guidance. The handbook never reproduces the text of the
 > standard; it cites clause numbers and explains them in its own words. The
@@ -29,6 +30,7 @@ Word and Excel templates. Interactive tools come next. See the [roadmap](https:/
 python -m venv .venv
 # Windows: .venv\Scripts\activate    macOS/Linux: source .venv/bin/activate
 pip install -r requirements-dev.txt
+python -m playwright install chromium   # for the browser tests
 mkdocs serve            # live preview at http://127.0.0.1:8000 (builds changed templates first)
 
 # the same checks CI runs:
@@ -57,6 +59,13 @@ mkdocs build --strict
 - `tests/` checks that every template opens, every template is linked from
   a clause, the sheet formulas give the right answers, and the Excel
   uncertainty budget agrees with `labqc.uncertainty.combine`.
+- `docs/tools/` holds the two browser tools in plain JavaScript, with no
+  server and no network calls; `data/gap_questions.yml` holds the
+  gap-analysis questions (3 to 8 per clause, checked in CI). SheetJS 0.20.3 is
+  bundled in `docs/tools/vendor/` for the Excel export (Apache 2.0).
+  `tests/test_tools.py` drives both tools in Chromium with Playwright:
+  scores, to-do list, exports, save and load, phone layout, and no network
+  requests.
 - `.github/workflows/docs.yml` runs all of that, builds with `--strict` on
   every push and pull request, and deploys `main` to GitHub Pages.
 

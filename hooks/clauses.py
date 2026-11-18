@@ -204,8 +204,35 @@ def _template_library(page_path: str) -> str:
     return "\n".join(rows)
 
 
+def _tool_data(page) -> str:
+    """Clause list, gap questions and page-relative chapter links for the browser tools."""
+    import json
+
+    questions = yaml.safe_load((ROOT / "data" / "gap_questions.yml").read_text(encoding="utf-8"))
+    page_url = page.url or ""
+    items = []
+    for num, c in _data["clauses"].items():
+        target = c["chapter"][: -len(".md")] + "/"
+        href = posixpath.relpath(target, page_url or ".") + "/"
+        items.append(
+            {
+                "number": num,
+                "title": c["title"],
+                "part": c["part"],
+                "href": href,
+                "questions": questions.get(num, []),
+            }
+        )
+    payload = json.dumps({"edition": _data["edition"], "clauses": items}, ensure_ascii=False)
+    # Escape "</" so the JSON cannot close the script element early.
+    payload = payload.replace("</", "<\\/")
+    return f'<script type="application/json" id="tool-data">{payload}</script>'
+
+
 def on_page_markdown(markdown, page, config, files, **kwargs):
     path = page.file.src_uri
+    if "<!-- tool-data -->" in markdown:
+        markdown = markdown.replace("<!-- tool-data -->", _tool_data(page))
     if "<!-- clause-map -->" in markdown:
         markdown = markdown.replace("<!-- clause-map -->", _clause_map(path))
     if "<!-- template-library -->" in markdown:

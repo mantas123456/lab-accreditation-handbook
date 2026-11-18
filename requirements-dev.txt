@@ -2,3 +2,4 @@
 pytest>=8
 formulas>=1.2      # recalculates the Excel formulas in tests
 labqc>=1.0         # reference calculation for the uncertainty budget test
+pytest-playwright>=0.5  # browser tests for the tools (then: python -m playwright install chromium)

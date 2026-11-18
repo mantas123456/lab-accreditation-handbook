@@ -44,6 +44,7 @@ theme:
 
 extra_css:
   - stylesheets/extra.css
+  - stylesheets/tools.css
 
 hooks:
   - hooks/clauses.py
@@ -130,6 +131,9 @@ nav:
       - 8.9 Management review: management/8-9-management-review.md
   - Field notes: field-notes/index.md
   - Templates: template-library/index.md
-  - Tools: tools/index.md
+  - Tools:
+      - tools/index.md
+      - Gap analysis: tools/gap-analysis.md
+      - Audit planner: tools/audit-planner.md
   - Glossary: glossary.md
   - About: about.md

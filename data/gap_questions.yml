@@ -1,0 +1,178 @@
+# Gap-analysis questions for the browser tool (docs/tools/gap-analysis.md).
+#
+# 3 to 8 questions per clause, written in our own words as practical checks a
+# small lab can answer yes / partly / no / not applicable. They are NOT the
+# wording of ISO/IEC 17025. Every clause in data/clauses.yml must appear here
+# (the CI clause check enforces it).
+
+"4.1":
+  - Top management has signed a short statement committing the lab to impartial results.
+  - We have a register of impartiality risks specific to our owners, customers, staff and shared resources.
+  - Each significant impartiality risk has an action, and we can show the action is in place.
+  - The register is reviewed at least yearly and whenever ownership, major customers or staff change.
+  - Staff know they can refuse pressure on a result, and who to tell.
+"4.2":
+  - Our terms of business commit the lab to keeping customer information confidential.
+  - Everyone with access (staff, students, temporary staff, contractors, IT providers) has signed a confidentiality agreement.
+  - We tell customers in advance about anything we plan to make public.
+  - We have a written rule for requests from authorities, including telling the customer where the law allows.
+  - Access to customer files, systems and retained samples is limited to those who need it.
+"5":
+  - We can name the legal entity responsible for the lab and the lab's top management.
+  - Our scope is written precisely (material, property, method, range) and matches what we claim on reports.
+  - An organisation chart shows the lab's place in any larger organisation and its reporting lines.
+  - Every role that affects results has written responsibilities and authorities.
+  - Every key role has a named deputy.
+  - We plan changes to people, premises and scope, and tell the accreditation body when its rules require.
+"6.1":
+  - For each method in scope we know which people, rooms, equipment and services it needs.
+  - We have identified single points of failure (one analyst, one instrument, one supplier) and have a plan for each.
+  - Methods we cannot currently run are suspended, not left in scope.
+"6.2":
+  - Each role has written competence requirements (education, training, skills, experience).
+  - Analysts are trained in steps, with competence criteria set before training starts.
+  - Each person is authorised in writing for specific methods and tasks (testing, checking, validating, opinions, reporting).
+  - People in training work under recorded supervision.
+  - Competence is monitored at least yearly after authorisation, using observation, QC and PT results.
+"6.3":
+  - We know which environmental conditions affect each method, with limits taken from methods and manuals.
+  - Conditions that matter are monitored and recorded, preferably by calibrated data loggers.
+  - When a limit is exceeded we assess the results produced meanwhile and record what we did.
+  - Incompatible activities (dusty preparation, furnaces, sensitive weighing) are kept apart.
+  - Access to lab areas is controlled.
+"6.4":
+  - Every item that affects results is in an equipment register with an ID used on labels and records.
+  - New or repaired equipment is checked against the method's needs before use.
+  - Calibration intervals are set and justified, and nothing overdue is in use.
+  - Every calibration certificate is reviewed against written acceptance criteria before the item goes back into use.
+  - Intermediate checks are planned, recorded and trended.
+  - Faulty equipment is labelled, taken out of use, and results since the last good check are assessed.
+"6.5":
+  - For each method we can describe the traceability chain from the result to SI units or another recognised reference.
+  - Calibrations come from providers accredited for that calibration and range.
+  - Certified reference materials come from competent producers, with certificates on file.
+  - Calibration certificates cover the ranges we actually use.
+  - Uncertainties from certificates are used in our uncertainty budgets.
+"6.6":
+  - We have listed the products and services that affect results (calibration, reference materials, subcontractors, critical supplies, IT).
+  - Each type has written selection criteria, and we keep an approved provider list.
+  - We check what arrives before using it and record the check.
+  - Providers are re-evaluated at least yearly and problems are acted on.
+"7.1":
+  - Every new request is reviewed against a checklist before we accept it, including phone orders.
+  - We confirm the method is suitable and current, and tell the customer if their choice is not.
+  - Methods outside our scope and any subcontracted work are agreed with the customer in advance.
+  - When a customer wants a pass/fail statement, the decision rule is agreed before testing.
+  - Changes after work starts are reviewed again and passed on to the analysts.
+"7.2":
+  - Methods are current editions of recognised standards, unless there is a documented reason.
+  - Every standard method was verified in our lab before we reported results.
+  - Every in-house, modified or extended method was validated, with criteria set before collecting data.
+  - Validation data covers real conditions (different days, analysts) and includes a bias check.
+  - Deviations from methods are justified, authorised and agreed with the customer.
+  - New editions of standards are reviewed and the changes verified before adoption.
+"7.3":
+  - Where we sample, we have a written sampling plan for each kind of sampling, based on a recognised standard.
+  - Sampling records are completed on site (who, when, where, conditions, increment locations).
+  - Deviations from the sampling plan are recorded, agreed with the customer and reported.
+  - Samplers are trained and authorised.
+"7.4":
+  - Every item gets a unique lab number at receipt, carried onto every subsample and record.
+  - The condition of each item is checked and recorded at receipt against defined criteria.
+  - We ask the customer before testing an unsuitable item, and note it on the report.
+  - Items are stored so the result is not affected, with monitoring where conditions matter.
+  - Retained samples are kept for a defined period and disposed of in a recorded way.
+"7.5":
+  - Raw observations are recorded at the time of the work, not copied up later.
+  - Records show who tested, checked and authorised each result, and when.
+  - Records identify the equipment, reference materials and method version used.
+  - Corrections leave the original readable, with the date, person and reason.
+  - From a report, we can find all the records behind it within a reasonable time.
+"7.6":
+  - Every method in scope has an uncertainty estimate, or a documented reason why a full estimate is not possible.
+  - Each budget lists its sources, the data for each, and how they were combined and expanded.
+  - Budgets use real data (validation, QC, PT, certificates) and include a bias term.
+  - The uncertainty is consistent with the scatter on our QC charts and our PT results.
+  - Budgets are reviewed at least yearly and after changes.
+  - Analysts can explain the main contributors for the methods they run.
+"7.7":
+  - Each method has a written monitoring plan (control samples, duplicates, blanks, CRMs) with acceptance criteria.
+  - QC limits are based on our own data, and recalculated on purpose, not by habit.
+  - Control results are checked before results are released, and failed runs are held.
+  - QC charts are reviewed regularly for trends, and the review is recorded.
+  - A PT or comparison plan covers every method in scope over the accreditation cycle.
+  - Questionable and unsatisfactory PT results are investigated with a root cause.
+"7.8":
+  - Reports are reviewed and authorised before release by an authorised person.
+  - Reports contain the information a reader needs (identification, method, item, dates, results with units, authoriser).
+  - Uncertainty is reported when the customer asks, when it affects conformity, or when the method requires it.
+  - Statements of conformity name the specification and the agreed decision rule.
+  - Opinions are clearly marked and given by authorised staff.
+  - Amended reports are clearly identified, say why, and refer to the report they replace.
+"7.9":
+  - We have a written complaints process, available to anyone who asks.
+  - Every complaint is logged, including ones we think are unjustified.
+  - The outcome is decided by someone not involved in the work complained about.
+  - Complainants receive an acknowledgement and a formal reply.
+  - Justified complaints lead to nonconformity and corrective action records.
+"7.10":
+  - Anyone can raise a nonconformity, and we record them, including small ones fixed at once.
+  - Affected work is stopped or held, and someone is authorised to decide when it restarts.
+  - We look back to the last good check and assess every result affected.
+  - Customers are informed and reports amended when results were wrong.
+  - Each nonconformity has a recorded decision on whether corrective action is needed.
+"7.11":
+  - We have a list of every system that collects, calculates, stores or reports data, including spreadsheets.
+  - Each was validated with known-answer tests before use and after changes.
+  - Formulas are locked, master files are read-only and versions are recorded with results.
+  - Access is by individual login with an audit trail where possible.
+  - Backups are tested by restoring at least once a year.
+  - Manual data transfers are checked.
+"8.1":
+  - We have stated whether we use option A (our own system) or option B (an ISO 9001 system).
+  - If option B, our audits and reviews actually cover the lab's technical work.
+  - Our management system works in practice, not only on paper (audits, reviews and corrective actions are happening).
+"8.2":
+  - We have a written policy and measurable objectives, reviewed at management review.
+  - Top management can show its commitment to the system beyond signing the manual.
+  - All system documents, including external ones, are referenced from one place.
+  - Staff can easily reach the documents that apply to their work.
+  - What our documents say matches what people actually do.
+"8.3":
+  - Documents are approved before issue by an authorised person.
+  - Every document has an ID, a revision, a date and page numbering.
+  - Only current versions are available where work is done; obsolete copies are withdrawn or marked.
+  - Changes are marked so readers see what changed.
+  - Documents are reviewed periodically, and the editions of external standards are checked at least yearly.
+"8.4":
+  - We have a list of record types with where they are kept and for how long.
+  - Retention periods meet contracts, law and the accreditation body's rules.
+  - Records are protected from loss and unauthorised change, with tested backups.
+  - Records can be found quickly, including old ones.
+  - Disposal at the end of the retention period is done on purpose and logged.
+"8.5":
+  - We have identified risks to valid results and opportunities to improve, specific to our processes.
+  - The important ones have actions built into procedures, training or equipment plans.
+  - We check whether the actions reduced the risk.
+  - The register is updated after complaints, nonconformities and changes, and reviewed at management review.
+"8.6":
+  - We ask customers for feedback, positive and negative, not only wait for complaints.
+  - Feedback and our own data (turnaround, repeats, QC) are analysed for improvement ideas.
+  - We keep a record of improvements made and their results.
+"8.7":
+  - Nonconformities are corrected and their consequences dealt with.
+  - Root causes are found by analysis, not stopped at "human error".
+  - We ask where else the same cause could act.
+  - Each corrective action has an owner and a due date, and is closed on time.
+  - Effectiveness is checked after enough time for the problem to show again.
+"8.8":
+  - We have an audit programme covering every clause and every method in scope, usually over a year.
+  - Audits include technical work (witness and vertical audits), not only document checks.
+  - Auditors do not audit their own work and are trained to audit.
+  - Findings are clearly written, graded and fed into corrective action without delay.
+  - Audit results are reported to management.
+"8.9":
+  - Top management reviews the system at planned intervals, at least yearly.
+  - The review covers every required input, with data rather than headings.
+  - Outputs are recorded as decisions and actions with owners and dates.
+  - Actions from the previous review are followed up.

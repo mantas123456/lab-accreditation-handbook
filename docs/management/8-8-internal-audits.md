@@ -85,12 +85,12 @@ from the order to the report. Findings:
 
 <!-- templates -->
 
-Version 0.5 adds an interactive audit planner.
+The [internal audit planner](../tools/audit-planner.md) does the same in your browser.
 
 ## Tools
 
-No calculation is needed for this clause. The audit planner in version 0.5
-will flag clauses not audited in 12 months.
+No calculation is needed for this clause. The [internal audit planner](../tools/audit-planner.md)
+flags any clause not covered in 12 months.
 
 ## Related clauses
 
