@@ -71,13 +71,14 @@ moisture and ash, on behalf of the buyer.
 | Lot | One truck delivery, 25 t, unloaded onto a conveyor |
 | What the sample represents | The whole delivery |
 | Method | The lab's procedure based on the solid biofuel sampling standard |
-| Increments | Taken from the falling stream at the conveyor end, spread evenly over the unloading time; number and size from the lab's table for this lot size |
+| Increments | Taken from the falling stream at the conveyor end, spread evenly over the unloading time. Number and volume worked out with the sampling standard's method for the required precision. For solid biofuels that is never fewer than 10 increments; very large lots are first split into sub-lots, each sampled on its own |
 | Equipment | Stream-sampling cup, cleaned and dry |
 | Combining and division | Increments combined into one bulk sample, reduced by riffle divider to two laboratory samples |
 | Containers | Airtight bags, filled and sealed at once to stop moisture change; labelled with job number, date, time and sampler |
 | Transport | Same day, kept away from heat |
 
-**Record.** The sampler logs the start and end time of unloading, the time
+**Record.** The sampler fills in a sampling record on site, logging the
+start and end time of unloading, the time
 of each increment, the weather (light rain; conveyor covered) and a photo of
 the sampling point.
 

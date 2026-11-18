@@ -81,7 +81,9 @@ that your lab performs at least as well as the method claims.
    uncertainty *U* = *k* × *u<sub>c</sub>*. *k* = 2 gives about 95 %
    coverage when there is plenty of data. When a large share of the budget
    rests on few data points, use the effective degrees of freedom
-   (Welch–Satterthwaite) to choose *k*; it will be a little above 2.
+   (Welch–Satterthwaite) to choose *k*; it will be a little above 2. Many
+   testing labs simply use *k* = 2, following the EA-4/02 guidance; that is
+   fine when the main contributions rest on enough data.
 8. **Check it against reality.** If *U* is smaller than the scatter on
    your own control chart, or your PT z-scores often exceed what *U*
    predicts, a source is missing.
@@ -111,7 +113,10 @@ M = \frac{m_2 - m_3}{m_2 - m_1} \times 100
 
 where *m*<sub>1</sub> is the empty tray, *m*<sub>2</sub> the tray with the
 sample before drying, and *m*<sub>3</sub> the tray with the sample after
-drying. The result for this sample is **M = 7.74 %**.
+drying. (The full method also corrects with an empty reference tray for
+buoyancy; it is left out of the equation here to keep it short.) The sample
+is dried until a further hour in the oven no longer changes its mass by more
+than a small set amount. The result for this sample is **M = 7.74 %**.
 
 **Sources and data**
 
@@ -120,7 +125,7 @@ drying. The result for this sample is **M = 7.74 %**.
 | Repeatability | 10 duplicate pairs on routine samples, s<sub>r</sub> = 0.10 %; mean of two reported, so 0.10 / √2 | A, normal | 0.071 | 0.071 | 10 |
 | Balance | Calibration certificate, U = 0.010 g (k = 2). Passed through the equation for a ~300 g test portion, the three weighings move M by less than 0.010 % (k = 2); that value is used, rounded up | B, normal | 0.010 (k = 2) | 0.005 | ∞ |
 | Drying temperature | Oven allowed 105 ± 2 °C; in-house study showed results move by up to ±0.05 % across that range | B, rectangular | ±0.05 | 0.029 | ∞ |
-| Moisture pick-up before weighing | Dried samples weighed hot vs. after 10 min; up to ±0.06 % | B, rectangular | ±0.06 | 0.035 | ∞ |
+| Weighing hot | Trays are weighed within seconds of leaving the oven, and an empty reference tray dried alongside corrects for air buoyancy. An in-house study put what that correction misses at up to ±0.06 % | B, rectangular | ±0.06 | 0.035 | ∞ |
 | Laboratory bias | Last six PT rounds: root mean square of differences from the assigned values, combined with the uncertainty of the assigned values | A, normal | 0.080 | 0.080 | 5 |
 
 All sensitivity coefficients are 1 because every source is already
@@ -144,7 +149,7 @@ The lab reports: **moisture 7.74 % ± 0.25 % (k = 2.11, about 95 % coverage)**.
 |---|---|
 | Laboratory bias | 47 % |
 | Repeatability | 37 % |
-| Moisture pick-up | 9 % |
+| Weighing hot | 9 % |
 | Drying temperature | 6 % |
 | Balance | 0.2 % |
 
@@ -167,7 +172,7 @@ budget = [
     Component("Repeatability (mean of duplicate)", 0.071, dof=10),
     Component("Balance calibration", 0.010, k=2),
     Component("Drying temperature 105 ± 2 °C", 0.05, "rectangular"),
-    Component("Moisture pick-up before weighing", 0.06, "rectangular"),
+    Component("Weighing hot (buoyancy residual)", 0.06, "rectangular"),
     Component("Laboratory bias (PT history)", 0.08, dof=5),
 ]
 result = combine(budget, value=7.74)
@@ -189,6 +194,12 @@ print(result.table)  # contributions, sorted largest first
   half-width belongs.
 - **Mixed units.** Relative and absolute uncertainties added together, or
   grams mixed with percent, without sensitivity coefficients.
+- **Repeatability from two or three results.** A standard deviation from so
+  few values is itself very uncertain. Use long-term duplicate or QC data
+  instead.
+- **No bias term.** A budget built only from repeatability and equipment
+  ignores how far the lab's results sit from the true value. PT or CRM data
+  fixes that.
 - **Sampling left out** when the lab takes the samples itself and the
   customer's question is about the batch, not the test portion.
 - **Uncertainty ignored in pass/fail statements**, with no decision rule

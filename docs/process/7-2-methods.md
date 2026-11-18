@@ -69,7 +69,10 @@ method you wrote or changed yourself.
 ## Worked example
 
 A made-up biofuel lab adds the standard method for ash content of solid
-biofuels (ashing at 550 °C) to its scope. It is a published standard used as
+biofuels to its scope. A sample of at least 1 g is spread thinly in a
+weighed dish and heated slowly in air, first held at a lower temperature so
+it does not ignite, then at 550 °C until its mass stops changing. All
+weighings are to 0.1 mg. It is a published standard used as
 written, so the lab **verifies** it.
 
 **Plan.** Precision from duplicate tests on an in-house pellet material on

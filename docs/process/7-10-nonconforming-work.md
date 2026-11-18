@@ -52,13 +52,17 @@ decide whether the cause needs corrective action.
 
 ## Worked example
 
-A made-up biofuel lab checks its bomb calorimeter every week by burning
-benzoic acid, a reference material with a certified heat of combustion. Its
-acceptance limit is the certified value ± 0.25 %.
+A made-up biofuel lab calibrates its bomb calorimeter with benzoic acid, a
+reference material with a certified heat of combustion, from a series of
+ten accepted burns. Between calibrations it burns one benzoic acid tablet
+every week as a check. It set the acceptance limit for that check from the
+spread of its calibration burns: the certified value ± 0.25 %.
 
 **Detection.** On Monday, the check reads 0.9 % low. A repeat check is also
 low. The analyst stops calorific value testing, labels the calorimeter and
-raises nonconformity NC-26-14.
+raises nonconformity NC-26-14. Looking back, there had been an earlier
+sign: twice in the past week, a sample's duplicate results differed by more
+than the method's repeatability limit and had to be repeated.
 
 **Look back.** The previous check, eight days earlier, passed. Since then,
 the lab has tested 11 samples, and reports for 10 of them have been issued.
@@ -77,9 +81,11 @@ technical manager's sign-off.
 | Change moves a result from below to above a contract minimum | 1 (report not yet issued) | Report issued with the retest result only |
 
 **Corrective action.** Could it happen again? Yes: the O-ring had no
-replacement schedule. Corrective action CA-26-06 adds a visual check of the
-seals to the weekly check, and replacement every six months, to the
-equipment plan ([6.4](../resources/6-4-equipment.md)).
+replacement schedule, and nobody treated repeated duplicate failures as a
+warning. Corrective action CA-26-06 adds a visual check of the seals to the
+weekly check and replacement every six months to the equipment plan
+([6.4](../resources/6-4-equipment.md)). It also adds a rule to the method:
+two repeated duplicates in one week trigger an extra benzoic acid check.
 
 ## Common findings
 
