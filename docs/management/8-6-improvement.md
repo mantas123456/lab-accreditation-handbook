@@ -68,8 +68,7 @@ this, as received or dry?"
 
 ## Templates
 
-No template is planned for this clause; a short customer survey may be
-added to the template pack later.
+<!-- templates -->
 
 ## Tools
 

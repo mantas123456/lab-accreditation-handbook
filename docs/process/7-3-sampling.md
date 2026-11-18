@@ -105,8 +105,9 @@ apply to the delivery as sampled."
 
 ## Templates
 
-No template is planned for this clause yet. The sampling record can be built
-from the technical records guidance in [7.5](7-5-technical-records.md).
+<!-- templates -->
+
+A sampling record can be built from the technical records guidance in [7.5](7-5-technical-records.md).
 
 ## Tools
 

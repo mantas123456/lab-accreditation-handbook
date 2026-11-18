@@ -97,7 +97,7 @@ before use ([7.2](7-2-methods.md)).
 
 ## Templates
 
-The software validation record arrives in version 0.4.
+<!-- templates -->
 
 ## Tools
 

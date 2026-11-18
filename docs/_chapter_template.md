@@ -42,7 +42,10 @@ Typical nonconformities raised at assessments, and how to avoid them.
 
 ## Templates
 
-Links to the downloads for this clause (from version 0.4).
+<!-- templates -->
+
+(The marker above is replaced with links to this clause's templates, from
+the `templates` list in data/clauses.yml.)
 
 ## Tools
 

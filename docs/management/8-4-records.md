@@ -76,8 +76,7 @@ test is recorded.
 
 ## Templates
 
-No template is planned for this clause; a retention table like the one
-above is usually part of the records procedure.
+<!-- templates -->
 
 ## Tools
 

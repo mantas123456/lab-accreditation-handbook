@@ -85,8 +85,7 @@ three months in the retained-sample store, then disposed of and logged.
 
 ## Templates
 
-No template is planned for this clause yet; a sample receipt form may be
-added to the template pack later.
+<!-- templates -->
 
 ## Tools
 

@@ -1,0 +1,30 @@
+title: Risk and opportunity register
+type: Register
+description: Risks to valid results and opportunities to improve, rated by likelihood and effect, with actions and a check that the actions worked.
+instructions:
+  - Use the lab's processes as a checklist (contract review, sampling, receipt, testing, QC, reporting, equipment, people, IT) and ask what could make a result wrong, late or lost, and what could make the lab better.
+  - The score (1 to 9) calculates itself from likelihood and effect; scores of 6 or more are highlighted.
+  - Each action should change something real (a check, a backup, a second trained person) and be written into the system.
+  - Review the register at management review, and after complaints, nonconformities and changes.
+sheets:
+  - name: Register
+    rows: 50
+    columns:
+      - {header: No., width: 6}
+      - {header: Process, width: 16, choices: [Contract review, Sampling, Item handling, Testing, QC and PT, Reporting, Equipment, People, Facilities, IT and data, Suppliers, Management system, Other]}
+      - {header: Risk or opportunity, width: 12, choices: [Risk, Opportunity]}
+      - {header: Description, width: 40}
+      - {header: Likelihood, width: 11, choices: [Low, Medium, High]}
+      - {header: Effect on valid results, width: 11, choices: [Low, Medium, High]}
+      - {header: Score (1-9), width: 9, formula: '=IF(OR(E{r}="",F{r}=""),"",MATCH(E{r},{{"Low","Medium","High"}},0)*MATCH(F{r},{{"Low","Medium","High"}},0))'}
+      - {header: Action, width: 36}
+      - {header: Owner, width: 14}
+      - {header: Due, width: 12, format: date}
+      - {header: Check of effectiveness, width: 30}
+      - {header: Status, width: 11, choices: [Open, In progress, Effective, Closed]}
+    highlights:
+      - {formula: 'AND(ISNUMBER($G2),$G2>=6)', color: FFCDD2}
+    examples:
+      - [1, People, Risk, Only one analyst authorised for CHNS analysis, High, High, null, Train and authorise a second analyst, Technical manager, 2026-06-30, Second analyst authorised in May, Effective]
+      - [2, IT and data, Risk, Error in a calculation spreadsheet, Medium, High, null, Validate all calculation sheets and lock formulas, Quality manager, 2026-04-30, Validation done; one error found and fixed, Effective]
+      - [3, Testing, Opportunity, Customers ask for chlorine analysis, null, null, null, Compare an in-house method with subcontracting, Lab head, 2026-09-30, Decision at management review, Open]

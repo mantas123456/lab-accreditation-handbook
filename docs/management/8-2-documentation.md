@@ -72,7 +72,7 @@ reported at management review.
 
 ## Templates
 
-The quality manual outline and the SOP template arrive in version 0.4.
+<!-- templates -->
 
 ## Tools
 

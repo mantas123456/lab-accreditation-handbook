@@ -73,7 +73,7 @@ present. The check is recorded and B returns to "Approved".
 
 ## Templates
 
-The supplier evaluation form arrives in version 0.4.
+<!-- templates -->
 
 ## Tools
 

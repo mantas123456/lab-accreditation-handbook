@@ -74,7 +74,7 @@ The lab chooses **option B** and records the mapping in its manual.
 
 ## Templates
 
-The quality manual outline (version 0.4) has sections for both options.
+<!-- templates -->
 
 ## Tools
 

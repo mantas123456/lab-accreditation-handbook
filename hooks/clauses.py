@@ -1,5 +1,6 @@
-"""MkDocs hook: builds clause badges, chapter side panels and the clause map
-from data/clauses.yml, so they never drift out of step with the chapters.
+"""MkDocs hook: builds clause badges, chapter side panels, the clause map and
+the templates library from data/clauses.yml and the template sources, so
+they never drift out of step with the chapters.
 
 A chapter opts in with front matter:
 
@@ -7,23 +8,35 @@ A chapter opts in with front matter:
     clause: "7.6"
     ---
 
-A page that contains the line ``<!-- clause-map -->`` gets the full clause
-table in its place.
+Markers replaced on any page:
+
+    <!-- clause-map -->        the full clause table
+    <!-- template-library -->  every downloadable template
+    <!-- templates -->         on a chapter: links to that clause's templates
+
+Before each build, templates whose sources changed are rebuilt into
+docs/downloads/ (see scripts/build_templates.py).
 """
 
 from __future__ import annotations
 
 import html
 import posixpath
+import sys
 from pathlib import Path
 
 import yaml
 from mkdocs.exceptions import PluginError
 
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import build_templates  # noqa: E402
+
 LABQC_DOCS = "https://mantas123456.github.io/lab-quality-toolkit/api/"
 LABQC_APP = "https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/"
-TEMPLATES_NOTE = "Downloads arrive in version 0.4."
 STATUS_LABEL = {"planned": "Planned", "draft": "Draft", "reviewed": "Reviewed"}
+FORMAT_LABEL = {"docx": "Word", "xlsx": "Excel"}
 
 _data: dict = {}
 
@@ -48,14 +61,35 @@ def load_clauses(root: Path) -> dict:
 
 
 def on_config(config, **kwargs):
-    root = Path(config.config_file_path).parent
-    _data.update(load_clauses(root))
+    _data.update(load_clauses(ROOT))
+    try:
+        templates = {t["id"]: t for t in build_templates.catalog()}
+    except ValueError as e:
+        raise PluginError(str(e)) from e
+    for num, c in _data["clauses"].items():
+        for tid in c.get("templates", []):
+            if tid not in templates:
+                raise PluginError(f"clauses.yml: clause {num} names unknown template {tid!r}")
+    _data["templates"] = templates
     return config
 
 
+def on_pre_build(config, **kwargs):
+    # Only stale files are rebuilt, so `mkdocs serve` does not loop on its own output.
+    build_templates.build(quiet=True)
+
+
 def _link(from_page: str, to_doc: str) -> str:
-    """Relative Markdown link target from one docs page to another."""
+    """Relative link target from one docs page to another file in docs/."""
     return posixpath.relpath(to_doc, posixpath.dirname(from_page) or ".")
+
+
+def _download(template: dict) -> str:
+    return f"downloads/{template['id']}.{template['format']}"
+
+
+def _clauses_for_template(tid: str) -> list[str]:
+    return [num for num, c in _data["clauses"].items() if tid in c.get("templates", [])]
 
 
 def _labqc_items(entries: list[dict]) -> list[str]:
@@ -74,17 +108,22 @@ def _labqc_items(entries: list[dict]) -> list[str]:
 
 
 def _panel(clause: dict, page_path: str) -> str:
-    clauses = _data["clauses"]
+    clauses, templates = _data["clauses"], _data["templates"]
     status = clause["status"]
     parts = [
         '<aside class="clause-panel" markdown>',
         f'<p class="clause-badge clause-badge--{status}">'
         f'Clause {clause["number"]} · {STATUS_LABEL[status]}</p>',
+        '<p class="clause-panel__head">Templates</p>',
     ]
-    parts.append('<p class="clause-panel__head">Templates</p>')
     if clause["templates"]:
-        parts.append("<ul>" + "".join(f"<li>{html.escape(t)}</li>" for t in clause["templates"]) + "</ul>")
-        parts.append(f'<p class="clause-panel__note">{TEMPLATES_NOTE}</p>')
+        # Markdown links, so MkDocs rewrites them for directory URLs and checks them.
+        items = "\n".join(
+            f"- [{templates[tid]['title']}]({_link(page_path, _download(templates[tid]))}) "
+            f"({FORMAT_LABEL[templates[tid]['format']]})"
+            for tid in clause["templates"]
+        )
+        parts.append(f"\n{items}\n")
     else:
         parts.append('<p class="clause-panel__note">None for this clause.</p>')
     parts.append('<p class="clause-panel__head">Tools</p>')
@@ -93,14 +132,12 @@ def _panel(clause: dict, page_path: str) -> str:
     else:
         parts.append('<p class="clause-panel__note">No calculation needed.</p>')
     parts.append('<p class="clause-panel__head">Related clauses</p>')
-    parts.append("</aside>")
     related = "\n".join(
         f"- [{r} {clauses[str(r)]['title']}]({_link(page_path, clauses[str(r)]['chapter'])})"
         for r in clause["related"]
     )
     # The related list is Markdown so MkDocs checks the links in --strict builds.
-    html_head = "\n".join(parts[:-1])
-    return f"{html_head}\n\n{related}\n\n</aside>\n"
+    return "\n".join(parts) + f"\n\n{related}\n\n</aside>\n"
 
 
 def _planned_note(clause: dict) -> str:
@@ -111,6 +148,21 @@ def _planned_note(clause: dict) -> str:
     )
 
 
+def _chapter_templates(clause: dict, page_path: str) -> str:
+    if not clause["templates"]:
+        return "No template for this clause."
+    lines = []
+    for tid in clause["templates"]:
+        t = _data["templates"][tid]
+        lines.append(
+            f"- **[{t['title']}]({_link(page_path, _download(t))})** "
+            f"({FORMAT_LABEL[t['format']]}): {t['description']}"
+        )
+    lines.append("")
+    lines.append(f"All templates: [templates library]({_link(page_path, 'template-library/index.md')}).")
+    return "\n".join(lines)
+
+
 def _clause_map(page_path: str) -> str:
     rows = [
         "| Clause | Topic | Part | Templates | labqc | Status |",
@@ -118,7 +170,10 @@ def _clause_map(page_path: str) -> str:
     ]
     for c in _data["clauses"].values():
         link = _link(page_path, c["chapter"])
-        templates = ", ".join(c["templates"]) or "–"
+        templates = ", ".join(
+            f"[{_data['templates'][tid]['title']}]({_link(page_path, _download(_data['templates'][tid]))})"
+            for tid in c["templates"]
+        ) or "–"
         tools = ", ".join(f"`{e['ref']}`" for e in c["labqc"]) or "–"
         rows.append(
             f"| {c['number']} | [{c['title']}]({link}) | {c['part']} | {templates} | {tools} "
@@ -127,10 +182,34 @@ def _clause_map(page_path: str) -> str:
     return "\n".join(rows)
 
 
+def _template_library(page_path: str) -> str:
+    def first_clause(t: dict) -> tuple:
+        nums = _clauses_for_template(t["id"])
+        if not nums:
+            return (99,)
+        return tuple(int(x) for x in nums[0].split("."))
+
+    rows = [
+        "| Template | Type | Format | Clauses | What it is |",
+        "|---|---|---|---|---|",
+    ]
+    for t in sorted(_data["templates"].values(), key=first_clause):
+        clause_links = ", ".join(
+            f"[{n}]({_link(page_path, _data['clauses'][n]['chapter'])})" for n in _clauses_for_template(t["id"])
+        ) or f"[Start here]({_link(page_path, 'start-here/journey.md')})"
+        rows.append(
+            f"| **[{t['title']}]({_link(page_path, _download(t))})** | {t['type']} "
+            f"| {FORMAT_LABEL[t['format']]} | {clause_links} | {t['description']} |"
+        )
+    return "\n".join(rows)
+
+
 def on_page_markdown(markdown, page, config, files, **kwargs):
     path = page.file.src_uri
     if "<!-- clause-map -->" in markdown:
         markdown = markdown.replace("<!-- clause-map -->", _clause_map(path))
+    if "<!-- template-library -->" in markdown:
+        markdown = markdown.replace("<!-- template-library -->", _template_library(path))
     number = page.meta.get("clause")
     if number is None:
         return markdown
@@ -139,6 +218,8 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
         raise PluginError(f"{path}: front matter names clause {number}, which is not in clauses.yml")
     if clause["chapter"] != path:
         raise PluginError(f"{path}: clauses.yml says clause {number} lives at {clause['chapter']}")
+    if "<!-- templates -->" in markdown:
+        markdown = markdown.replace("<!-- templates -->", _chapter_templates(clause, path))
     insert = _panel(clause, path)
     if clause["status"] == "planned":
         insert += "\n" + _planned_note(clause)

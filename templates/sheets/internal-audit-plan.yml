@@ -1,0 +1,41 @@
+title: Internal audit plan
+type: Plan
+description: A yearly audit programme as a grid of clauses by months, with the audit type and auditor, that flags any clause not audited this year.
+instructions:
+  - Mark each month as Planned, then change it to Done when the audit report is complete.
+  - Every clause should be audited at least once a year; rows with no Done are highlighted. Audit areas with problems or changes more often.
+  - Mix horizontal audits (one clause across the lab), vertical audits (one report traced back) and witness audits (a test observed).
+  - Auditors must not audit their own work. Record the auditor and keep the audit reports and follow-up.
+sheets:
+  - name: Programme
+    rows: 30
+    freeze_first_column: true
+    columns:
+      - {header: Clause, width: 8}
+      - {header: Topic, width: 28}
+      - {header: Jan, width: 8, choices: [Planned, Done]}
+      - {header: Feb, width: 8, choices: [Planned, Done]}
+      - {header: Mar, width: 8, choices: [Planned, Done]}
+      - {header: Apr, width: 8, choices: [Planned, Done]}
+      - {header: May, width: 8, choices: [Planned, Done]}
+      - {header: Jun, width: 8, choices: [Planned, Done]}
+      - {header: Jul, width: 8, choices: [Planned, Done]}
+      - {header: Aug, width: 8, choices: [Planned, Done]}
+      - {header: Sep, width: 8, choices: [Planned, Done]}
+      - {header: Oct, width: 8, choices: [Planned, Done]}
+      - {header: Nov, width: 8, choices: [Planned, Done]}
+      - {header: Dec, width: 8, choices: [Planned, Done]}
+      - {header: "Audited this year?", width: 10, formula: '=IF(A{r}="","",IF(COUNTIF(C{r}:N{r},"Done")>0,"Yes","NO"))'}
+      - {header: Audit type, width: 12, choices: [Horizontal, Vertical, Witness]}
+      - {header: Auditor, width: 16}
+    highlights:
+      - {formula: '$O2="NO"', color: FFCDD2}
+    examples:
+      - ["4.1", Impartiality, null, Done, null, null, null, null, null, null, null, null, null, null, null, Horizontal, Technical manager]
+      - ["4.2", Confidentiality, null, Done, null, null, null, null, null, null, null, null, null, null, null, Horizontal, Technical manager]
+      - ["5", Structure, null, Done, null, null, null, null, null, null, null, null, null, null, null, Horizontal, Technical manager]
+      - ["6.2", Personnel, null, null, null, null, null, null, null, null, Planned, null, null, null, null, Horizontal, Quality manager]
+      - ["6.4", Equipment, null, null, null, Done, null, null, null, null, null, null, null, null, null, Horizontal, Senior analyst]
+      - ["6.5", Traceability, null, null, null, Done, null, null, null, null, null, null, null, null, null, Horizontal, Senior analyst]
+      - ["7.7", Validity of results, null, null, Done, null, null, null, null, null, Planned, null, null, null, null, Vertical, Quality manager]
+      - ["8.8", Internal audits, null, null, null, null, null, null, null, null, null, Planned, null, null, null, Horizontal, External auditor]

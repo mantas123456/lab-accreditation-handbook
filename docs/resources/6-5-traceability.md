@@ -84,8 +84,7 @@ maker's specification).
 
 ## Templates
 
-The calibration schedule (version 0.4) lists each item that carries
-traceability, its provider and its due date.
+<!-- templates -->
 
 ## Tools
 

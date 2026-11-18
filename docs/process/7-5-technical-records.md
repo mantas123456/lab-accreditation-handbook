@@ -85,8 +85,7 @@ balance and oven were in control, and follow the correction.
 
 ## Templates
 
-No template is planned for this clause; method worksheets are specific to
-each lab. The SOP template (version 0.4) includes a worksheet section.
+<!-- templates -->
 
 ## Tools
 

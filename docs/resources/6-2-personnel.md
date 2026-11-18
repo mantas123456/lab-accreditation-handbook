@@ -78,7 +78,7 @@ QC results for the year (no rejects caused by E) and E's PT result
 
 ## Templates
 
-The training and authorisation record arrives in version 0.4.
+<!-- templates -->
 
 ## Tools
 

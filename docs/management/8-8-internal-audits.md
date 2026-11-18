@@ -83,8 +83,9 @@ from the order to the report. Findings:
 
 ## Templates
 
-The internal audit plan and checklist arrive in version 0.4. Version 0.5
-adds an interactive audit planner.
+<!-- templates -->
+
+Version 0.5 adds an interactive audit planner.
 
 ## Tools
 

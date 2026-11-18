@@ -66,7 +66,7 @@ separate section of the same register.
 
 ## Templates
 
-The risk register template arrives in version 0.4.
+<!-- templates -->
 
 ## Tools
 

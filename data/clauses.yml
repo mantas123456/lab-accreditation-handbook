@@ -9,7 +9,7 @@
 #   title     short label in our own words
 #   part      handbook part (General, Structure, Resources, Process, Management system)
 #   chapter   path of the chapter page, relative to docs/
-#   templates list of template names (files arrive in version 0.4)
+#   templates list of template ids: file names in templates/src or templates/sheets
 #   labqc     list of labqc links, or [] when no calculation is involved
 #               ref: Python name, linked to the labqc API reference
 #               app: page of the labqc web app (optional)
@@ -28,7 +28,7 @@ clauses:
     title: Impartiality
     part: General
     chapter: general/4-1-impartiality.md
-    templates: [Impartiality risk register]
+    templates: [impartiality-risk-register]
     labqc: []
     related: ["4.2", "5", "8.5"]
     status: draft
@@ -36,7 +36,7 @@ clauses:
     title: Confidentiality
     part: General
     chapter: general/4-2-confidentiality.md
-    templates: [Confidentiality agreement]
+    templates: [confidentiality-agreement]
     labqc: []
     related: ["4.1", "7.11", "8.4"]
     status: draft
@@ -46,7 +46,7 @@ clauses:
     title: Legal entity, scope, roles and authority
     part: Structure
     chapter: structure/5-structure.md
-    templates: [Organisation chart, Roles and deputies matrix]
+    templates: [organisation-chart, roles-and-deputies-matrix]
     labqc: []
     related: ["4.1", "6.2", "8.2"]
     status: draft
@@ -64,7 +64,7 @@ clauses:
     title: Personnel, competence and authorisation
     part: Resources
     chapter: resources/6-2-personnel.md
-    templates: [Training and authorisation record]
+    templates: [training-and-authorisation-record, roles-and-deputies-matrix]
     labqc: []
     related: ["5", "7.2", "8.8"]
     status: draft
@@ -80,7 +80,7 @@ clauses:
     title: Equipment
     part: Resources
     chapter: resources/6-4-equipment.md
-    templates: [Equipment register, Calibration schedule]
+    templates: [equipment-register, calibration-schedule]
     labqc:
       - ref: labqc.control_charts.westgard
         app: QC_charts
@@ -90,7 +90,7 @@ clauses:
     title: Metrological traceability
     part: Resources
     chapter: resources/6-5-traceability.md
-    templates: [Calibration schedule]
+    templates: [calibration-schedule]
     labqc: []
     related: ["6.4", "7.6", "7.2"]
     status: draft
@@ -98,7 +98,7 @@ clauses:
     title: Externally provided products and services
     part: Resources
     chapter: resources/6-6-external-providers.md
-    templates: [Supplier evaluation form]
+    templates: [supplier-evaluation]
     labqc: []
     related: ["6.4", "6.5", "7.1"]
     status: draft
@@ -108,7 +108,7 @@ clauses:
     title: Review of requests, tenders and contracts
     part: Process
     chapter: process/7-1-contract-review.md
-    templates: [Contract review checklist]
+    templates: [contract-review-checklist]
     labqc: []
     related: ["7.2", "7.8", "6.6"]
     status: draft
@@ -116,7 +116,7 @@ clauses:
     title: Selecting, verifying and validating methods
     part: Process
     chapter: process/7-2-methods.md
-    templates: [Validation plan and report]
+    templates: [validation-plan-and-report]
     labqc:
       - ref: labqc.validation.linearity
         app: Method_validation
@@ -145,7 +145,7 @@ clauses:
     title: Technical records
     part: Process
     chapter: process/7-5-technical-records.md
-    templates: []
+    templates: [sop-template]
     labqc: []
     related: ["8.4", "7.11", "7.8"]
     status: draft
@@ -153,7 +153,7 @@ clauses:
     title: Measurement uncertainty
     part: Process
     chapter: process/7-6-measurement-uncertainty.md
-    templates: [Uncertainty budget]
+    templates: [uncertainty-budget]
     labqc:
       - ref: labqc.uncertainty.combine
         app: Uncertainty_budget
@@ -165,7 +165,7 @@ clauses:
     title: Ensuring the validity of results
     part: Process
     chapter: process/7-7-validity-of-results.md
-    templates: [PT plan]
+    templates: [pt-plan]
     labqc:
       - ref: labqc.control_charts.westgard
         app: QC_charts
@@ -179,7 +179,7 @@ clauses:
     title: Reporting results
     part: Process
     chapter: process/7-8-reporting.md
-    templates: [Test report template]
+    templates: [test-report-template]
     labqc:
       - ref: labqc.emissions.correct_emission
         app: Emissions
@@ -192,7 +192,7 @@ clauses:
     title: Complaints
     part: Process
     chapter: process/7-9-complaints.md
-    templates: [Complaint form]
+    templates: [complaint-form]
     labqc: []
     related: ["7.10", "8.7", "4.1"]
     status: draft
@@ -200,7 +200,7 @@ clauses:
     title: Nonconforming work
     part: Process
     chapter: process/7-10-nonconforming-work.md
-    templates: [NCR/CAPA form]
+    templates: [ncr-capa-form]
     labqc: []
     related: ["7.7", "8.7", "7.9"]
     status: draft
@@ -208,7 +208,7 @@ clauses:
     title: Control of data and information management
     part: Process
     chapter: process/7-11-data-management.md
-    templates: [Software validation record]
+    templates: [software-validation-record]
     labqc: []
     related: ["7.5", "8.4", "4.2"]
     status: draft
@@ -218,7 +218,7 @@ clauses:
     title: Option A or option B
     part: Management system
     chapter: management/8-1-options.md
-    templates: [Quality manual outline]
+    templates: [quality-manual-outline]
     labqc: []
     related: ["8.2", "8.9"]
     status: draft
@@ -226,7 +226,7 @@ clauses:
     title: Management system documentation
     part: Management system
     chapter: management/8-2-documentation.md
-    templates: [Quality manual outline, SOP template]
+    templates: [quality-manual-outline, sop-template]
     labqc: []
     related: ["8.3", "8.1", "5"]
     status: draft
@@ -234,7 +234,7 @@ clauses:
     title: Control of documents
     part: Management system
     chapter: management/8-3-document-control.md
-    templates: [Document master list]
+    templates: [document-master-list]
     labqc: []
     related: ["8.2", "8.4"]
     status: draft
@@ -250,7 +250,7 @@ clauses:
     title: Risks and opportunities
     part: Management system
     chapter: management/8-5-risks-and-opportunities.md
-    templates: [Risk register]
+    templates: [risk-register]
     labqc: []
     related: ["4.1", "8.6", "8.9"]
     status: draft
@@ -266,7 +266,7 @@ clauses:
     title: Corrective action
     part: Management system
     chapter: management/8-7-corrective-action.md
-    templates: [NCR/CAPA form]
+    templates: [ncr-capa-form]
     labqc: []
     related: ["7.10", "7.9", "8.8"]
     status: draft
@@ -274,7 +274,7 @@ clauses:
     title: Internal audits
     part: Management system
     chapter: management/8-8-internal-audits.md
-    templates: [Internal audit plan and checklist]
+    templates: [internal-audit-plan, internal-audit-checklist]
     labqc: []
     related: ["8.7", "8.9", "6.2"]
     status: draft
@@ -282,7 +282,7 @@ clauses:
     title: Management review
     part: Management system
     chapter: management/8-9-management-review.md
-    templates: [Management review agenda and minutes]
+    templates: [management-review-agenda-and-minutes]
     labqc: []
     related: ["8.8", "8.5", "8.6"]
     status: draft

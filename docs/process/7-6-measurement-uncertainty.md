@@ -209,8 +209,9 @@ print(result.table)  # contributions, sorted largest first
 
 ## Templates
 
-The uncertainty budget spreadsheet arrives in version 0.4. It uses the same
-calculation as `labqc.uncertainty.combine`, so the two always agree.
+<!-- templates -->
+
+The spreadsheet uses the same calculation as `labqc.uncertainty.combine`, and the tests in this handbook's repository check that the two agree.
 
 ## Tools
 

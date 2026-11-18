@@ -158,7 +158,7 @@ print(t.bias, t.U_bias, t.passed)                            # 0.028 0.037 True
 
 ## Templates
 
-The validation plan and report template arrives in version 0.4.
+<!-- templates -->
 
 ## Tools
 

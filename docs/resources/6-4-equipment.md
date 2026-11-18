@@ -102,7 +102,7 @@ needed. Everything is recorded in B-03's history.
 
 ## Templates
 
-The equipment register and calibration schedule arrive in version 0.4.
+<!-- templates -->
 
 ## Tools
 

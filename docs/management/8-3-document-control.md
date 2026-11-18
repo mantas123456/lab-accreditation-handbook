@@ -73,7 +73,7 @@ old electronic version is moved to an archive folder marked "Superseded".
 
 ## Templates
 
-The document master list arrives in version 0.4.
+<!-- templates -->
 
 ## Tools
 

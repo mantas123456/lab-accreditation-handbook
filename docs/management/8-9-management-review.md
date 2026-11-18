@@ -72,7 +72,7 @@ date.
 
 ## Templates
 
-The management review agenda and minutes template arrives in version 0.4.
+<!-- templates -->
 
 ## Tools
 

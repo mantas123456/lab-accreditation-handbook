@@ -15,7 +15,8 @@ of the side panel.
 4. **Worked example:** from a fuel, environmental or calibration lab, with
    made-up but realistic numbers.
 5. **Common findings:** typical nonconformities and how to avoid them.
-6. **Templates:** editable downloads (from version 0.4).
+6. **Templates:** editable Word and Excel downloads (see the
+   [templates library](../template-library/index.md)).
 7. **Tools:** the matching [labqc](https://github.com/mantas123456/lab-quality-toolkit)
    function or web-app page, where a calculation is involved.
 8. **Related clauses.**

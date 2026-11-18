@@ -22,7 +22,9 @@ mistakes that most often become findings.
 
 ## What is written so far
 
-This is version 0.3. **Every clause of the standard has a chapter**, from
+This is version 0.4. **Every clause of the standard has a chapter**, and
+there are **24 editable [templates](template-library/index.md)** in Word and
+Excel, from an uncertainty budget to a management review agenda. Chapters run from
 [4.1 Impartiality](general/4-1-impartiality.md) to
 [8.9 Management review](management/8-9-management-review.md), plus the
 [Start here](start-here/index.md) guides. All chapters are drafts until they

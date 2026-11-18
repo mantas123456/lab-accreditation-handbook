@@ -1,5 +1,7 @@
 .venv/
 site/
+docs/downloads/
+templates/.build/
 __pycache__/
 *.pyc
 .cache/

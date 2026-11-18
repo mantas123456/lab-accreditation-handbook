@@ -84,7 +84,7 @@ The checklist, emails and the amendment are filed in the job record.
 
 ## Templates
 
-The contract review checklist arrives in version 0.4.
+<!-- templates -->
 
 ## Tools
 

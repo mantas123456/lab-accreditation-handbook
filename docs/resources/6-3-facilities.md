@@ -78,8 +78,7 @@ value tests ran during that period. The lab:
 
 ## Templates
 
-No template is planned for this clause; an environmental monitoring log may
-be added to the template pack later.
+<!-- templates -->
 
 ## Tools
 

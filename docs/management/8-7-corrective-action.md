@@ -100,7 +100,7 @@ updated.
 
 ## Templates
 
-The NCR/CAPA form arrives in version 0.4.
+<!-- templates -->
 
 ## Tools
 

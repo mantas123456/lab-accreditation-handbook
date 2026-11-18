@@ -71,7 +71,7 @@ answer is that the lab cannot discuss any customer's work.
 
 ## Templates
 
-A confidentiality agreement template arrives in version 0.4.
+<!-- templates -->
 
 ## Tools
 

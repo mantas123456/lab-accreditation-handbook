@@ -1,0 +1,29 @@
+title: Impartiality risk register
+type: Register
+description: Risks to impartiality from ownership, money, customers, staff and shared resources, each rated, with actions and evidence.
+instructions:
+  - List every source of pressure that could push results in one direction. Be specific to your lab; a generic list will not convince an assessor.
+  - Likelihood and effect are Low, Medium or High. The score (1 to 9) calculates itself; scores of 6 or more are highlighted.
+  - Review the register at least once a year and whenever something changes (new owner, new major customer, new staff from a customer).
+  - Record the evidence that each action is in place.
+sheets:
+  - name: Register
+    rows: 40
+    columns:
+      - {header: No., width: 6}
+      - {header: Source, width: 16, choices: [Ownership, Finance, Customer, Staff, Supplier, Shared resources, Advice or consulting, Other]}
+      - {header: Description of the risk, width: 42}
+      - {header: Likelihood, width: 11, choices: [Low, Medium, High]}
+      - {header: Effect on impartiality, width: 11, choices: [Low, Medium, High]}
+      - {header: Score (1-9), width: 9, formula: '=IF(OR(D{r}="",E{r}=""),"",MATCH(D{r},{{"Low","Medium","High"}},0)*MATCH(E{r},{{"Low","Medium","High"}},0))'}
+      - {header: Action to remove or reduce the risk, width: 40}
+      - {header: Owner, width: 14}
+      - {header: Evidence, width: 26}
+      - {header: Last reviewed, width: 12, format: date}
+      - {header: Status, width: 11, choices: [Open, Controlled, Closed]}
+    highlights:
+      - {formula: 'AND(ISNUMBER($F2),$F2>=6)', color: FFCDD2}
+    examples:
+      - [1, Ownership, "The group's pellet plant is a customer; results affect its sales", High, High, null, "Plant results authorised by the technical manager, who reports to the institute director; plant staff have no access to lab systems", Lab head, Organisation chart; access list, 2026-01-20, Controlled]
+      - [2, Customer, One customer brings 35 % of income, Medium, Medium, null, No staff incentives linked to any customer; income reviewed at management review, Lab head, Bonus policy; review minutes, 2026-01-20, Controlled]
+      - [3, Staff, New analyst moved from a customer's quality department, Medium, Medium, null, Declaration of interest; not assigned to that customer's samples for 12 months, Quality manager, Signed declaration; work allocation, 2026-03-01, Controlled]

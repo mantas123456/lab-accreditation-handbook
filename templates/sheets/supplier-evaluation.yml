@@ -1,0 +1,30 @@
+title: Supplier evaluation and approved provider list
+type: Register
+description: Criteria, evaluations and status for calibration labs, reference material producers, subcontractors and critical suppliers.
+instructions:
+  - List every provider whose product or service affects your results; calibration labs, reference material producers, subcontract labs, critical reagents and gases, maintenance, and IT services that hold results.
+  - Set the criteria by type before you evaluate. For a calibration lab, check its accreditation scope covers your calibration and range, not only that it is accredited.
+  - Evaluate before first use and at least once a year. Record problems found (late, wrong range, failed incoming checks) and the decision.
+  - Only providers marked Approved or Conditional may be used. Conditional means approved with a specific condition written in the notes.
+sheets:
+  - name: Providers
+    rows: 40
+    columns:
+      - {header: Provider, width: 22}
+      - {header: Supplies, width: 26}
+      - {header: Type, width: 16, choices: [Calibration, Reference material, Subcontract testing, Reagent or gas, Maintenance, IT or software, Other]}
+      - {header: Criteria, width: 30}
+      - {header: Evidence checked, width: 26}
+      - {header: Problems since last evaluation, width: 26}
+      - {header: Last evaluation, width: 12, format: date}
+      - {header: Next evaluation, width: 12, format: date, formula: '=IF(G{r}="","",EDATE(G{r},12))'}
+      - {header: Status, width: 12, choices: [Approved, Conditional, Not approved]}
+      - {header: Notes and conditions, width: 30}
+      - {header: Evaluated by, width: 14}
+    highlights:
+      - {formula: '$I2="Not approved"', color: FFCDD2}
+      - {formula: '$I2="Conditional"', color: FFF9C4}
+    examples:
+      - [Calibration lab A, Balance and weights calibration, Calibration, Accredited for mass up to 220 g, Accreditation certificate and scope checked, None, 2026-01-15, null, Approved, null, Quality manager]
+      - [Calibration lab B, Thermometer calibration, Calibration, Accredited for temperature 0-150 °C, Accreditation scope checked, Last certificate stopped at 100 °C, 2026-01-15, null, Conditional, Every order must specify the range 0-150 °C, Quality manager]
+      - [Lab D, Chlorine in fuel, Subcontract testing, Accredited for the method; turnaround 10 days; customer agreement, Scope checked; customer agreements on file, One late result, 2026-01-15, null, Approved, Late result discussed with the lab, Quality manager]

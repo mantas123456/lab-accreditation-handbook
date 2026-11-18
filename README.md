@@ -15,9 +15,9 @@ Calculations link to [labqc](https://github.com/mantas123456/lab-quality-toolkit
 a Python library and web app for uncertainty budgets, method validation,
 PT scores and QC charts.
 
-**Status:** version 0.3. Every clause of ISO/IEC 17025:2017 (4.1 to 8.9)
-has a draft chapter, plus the Start here guides; templates and tools come
-next. See the [roadmap](https://mantas123456.github.io/lab-accreditation-handbook/roadmap/).
+**Status:** version 0.4. Every clause of ISO/IEC 17025:2017 (4.1 to 8.9)
+has a draft chapter, plus the Start here guides and a pack of 24 editable
+Word and Excel templates. Interactive tools come next. See the [roadmap](https://mantas123456.github.io/lab-accreditation-handbook/roadmap/).
 
 > Not official guidance. The handbook never reproduces the text of the
 > standard; it cites clause numbers and explains them in its own words. The
@@ -28,10 +28,14 @@ next. See the [roadmap](https://mantas123456.github.io/lab-accreditation-handboo
 ```bash
 python -m venv .venv
 # Windows: .venv\Scripts\activate    macOS/Linux: source .venv/bin/activate
-pip install -r requirements-docs.txt
-mkdocs serve            # live preview at http://127.0.0.1:8000
+pip install -r requirements-dev.txt
+mkdocs serve            # live preview at http://127.0.0.1:8000 (builds changed templates first)
+
+# the same checks CI runs:
 python scripts/check_clauses.py
-mkdocs build --strict   # the same checks CI runs
+python scripts/build_templates.py --force
+pytest -q
+mkdocs build --strict
 ```
 
 ## How it is built
@@ -46,8 +50,15 @@ mkdocs build --strict   # the same checks CI runs
 - `scripts/check_clauses.py` (run in CI) fails if a clause has no chapter,
   a chapter names the wrong clause, a draft chapter lacks a standard
   heading, or a chapter is missing from the navigation.
-- `.github/workflows/docs.yml` builds with `--strict` on every push and
-  pull request, and deploys `main` to GitHub Pages.
+- `templates/src/*.md` (Word) and `templates/sheets/*.yml` (Excel) are the
+  template sources. `scripts/build_templates.py` turns them into
+  `docs/downloads/` with Pandoc and openpyxl; `data/clauses.yml` says which
+  clause links to which template. Generated files are not committed.
+- `tests/` checks that every template opens, every template is linked from
+  a clause, the sheet formulas give the right answers, and the Excel
+  uncertainty budget agrees with `labqc.uncertainty.combine`.
+- `.github/workflows/docs.yml` runs all of that, builds with `--strict` on
+  every push and pull request, and deploys `main` to GitHub Pages.
 
 ## Licence
 

@@ -101,7 +101,7 @@ two repeated duplicates in one week trigger an extra benzoic acid check.
 
 ## Templates
 
-The NCR/CAPA form arrives in version 0.4.
+<!-- templates -->
 
 ## Tools
 

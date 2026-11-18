@@ -80,7 +80,7 @@ splitting samples for comparison tests.
 
 ## Templates
 
-The complaint form arrives in version 0.4.
+<!-- templates -->
 
 ## Tools
 

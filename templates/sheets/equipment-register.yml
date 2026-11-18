@@ -1,0 +1,31 @@
+title: Equipment register
+type: Register
+description: One row per item that affects results, with identity, location, use, calibration need, intermediate checks and status.
+instructions:
+  - Give every item an ID and use the same ID on its label, on worksheets and in records.
+  - List instruments, measurement standards, reference materials, software and any apparatus whose performance affects results.
+  - Record calibration dates and due dates in the calibration schedule; this register is the list of what you own and how it is controlled.
+  - When an item goes out of service, change its status here at once and label it.
+sheets:
+  - name: Register
+    rows: 60
+    columns:
+      - {header: ID, width: 9}
+      - {header: Item, width: 22}
+      - {header: Maker and model, width: 20}
+      - {header: Serial number, width: 14}
+      - {header: Location, width: 14}
+      - {header: Used for (methods), width: 22}
+      - {header: Range and resolution, width: 18}
+      - {header: "Calibration needed?", width: 11, choices: ['Yes', 'No']}
+      - {header: Intermediate check, width: 26}
+      - {header: Maintenance, width: 20}
+      - {header: Accepted for use (date), width: 12, format: date}
+      - {header: Status, width: 13, choices: [In service, Out of service, Retired]}
+      - {header: Records kept in, width: 16}
+    highlights:
+      - {formula: '$L2="Out of service"', color: FFE0B2}
+    examples:
+      - [B-03, Analytical balance, Maker X model Y, "1234567", Balance room, Ash; moisture of analysis sample; calorific value, 0-220 g; 0.1 mg, 'Yes', Daily 200 g check weight within ±0.3 mg, Cleaned weekly; serviced yearly, 2024-02-01, In service, Equipment file B-03]
+      - [O-01, Drying oven, Maker Z, "A-998", Drying room, Total moisture, up to 300 °C, 'No', Monthly temperature check with thermometer T-02, Door seal checked monthly, 2023-09-15, In service, Equipment file O-01]
+      - [T-02, Reference thermometer, Maker W, "T55", Drying room, Oven checks, 0-150 °C; 0.1 °C, 'Yes', Ice point check every 6 months, None, 2024-05-10, In service, Equipment file T-02]

@@ -1,0 +1,28 @@
+title: Document master list
+type: Register
+description: Every controlled document, internal and external, with its revision, owner, review date and where copies are; overdue reviews turn red.
+instructions:
+  - One row per controlled document, including external documents (standards, equipment manuals, the accreditation body's rules).
+  - Check the editions of external standards at least once a year against the publisher's catalogue and record the date.
+  - Documents whose review date has passed turn red.
+  - When a document is superseded, change its status and record where the archived copy is. Collect and destroy uncontrolled printed copies.
+sheets:
+  - name: Documents
+    rows: 80
+    columns:
+      - {header: Document ID, width: 13}
+      - {header: Title, width: 34}
+      - {header: Type, width: 16, choices: [Manual, Procedure, Method SOP, Work instruction, Form, External standard, External other]}
+      - {header: Revision or edition, width: 11}
+      - {header: Effective date, width: 12, format: date}
+      - {header: Owner, width: 16}
+      - {header: Next review, width: 12, format: date}
+      - {header: Copies (where), width: 26}
+      - {header: Status, width: 12, choices: [Current, Draft, Superseded, Withdrawn]}
+      - {header: Last edition check (external), width: 13, format: date}
+    highlights:
+      - {formula: 'AND($I2="Current",ISNUMBER($G2),$G2<TODAY())', color: FFCDD2}
+    examples:
+      - [QM-01, Quality manual, Manual, "5", 2026-01-10, Quality manager, 2028-01-10, Server (read-only), Current, null]
+      - [SOP-MO-02, Total moisture, Method SOP, "3", 2025-03-01, Technical manager, 2027-03-01, Server; printed copy no. 1 in drying room, Current, null]
+      - [EXT-ASH, Standard method for ash in solid biofuels, External standard, current edition, null, Quality manager, null, Licensed PDF on server, Current, 2026-01-05]

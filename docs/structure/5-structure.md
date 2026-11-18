@@ -90,8 +90,7 @@ require for key staff changes.
 
 ## Templates
 
-The organisation chart and the roles and deputies matrix arrive in
-version 0.4.
+<!-- templates -->
 
 ## Tools
 

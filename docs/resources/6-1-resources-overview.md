@@ -70,8 +70,7 @@ use.
 
 ## Templates
 
-No template is planned for this clause. The equipment register (version
-0.4) covers most of the resource map.
+<!-- templates -->
 
 ## Tools
 

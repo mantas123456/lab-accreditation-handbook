@@ -1,4 +1,6 @@
 # Field notes
 
 !!! note "Planned"
-    This page arrives in version 0.3. See the [roadmap](../roadmap.md).
+    Common findings across clauses, preparing for the on-site assessment, and a
+    worked case study of a made-up fuel-testing lab arrive in a later version.
+    See the [roadmap](../roadmap.md).

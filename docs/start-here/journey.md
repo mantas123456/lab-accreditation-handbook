@@ -82,4 +82,5 @@ validation data, need longer.
 - **Keep the scope small at first.** Accredit the methods you run most,
   then extend.
 - **Do a mock assessment** with someone from outside the lab before the
-  real one.
+  real one. The [pre-assessment readiness checklist](../downloads/pre-assessment-checklist.docx)
+  (Word) lists what the assessor will ask to see, clause by clause.

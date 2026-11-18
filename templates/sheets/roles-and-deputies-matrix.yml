@@ -1,0 +1,40 @@
+title: Roles, deputies and authorisation matrix
+type: Matrix
+description: Who holds each role, who deputises, and who is authorised for which method and task, on one sheet.
+instructions:
+  - The Roles sheet lists every role whose work affects results, its holder, its deputy and its key authorities.
+  - The Authorisations sheet has one row per person. For each method or task choose Authorised, In training or leave blank. Add a column for every method in your scope.
+  - Keep the dates of authorisation in the training and authorisation record for each person; this matrix is the quick overview.
+  - Update the matrix whenever someone is authorised, leaves or changes role. Print it for the lab notice board if useful.
+sheets:
+  - name: Roles
+    rows: 15
+    columns:
+      - {header: Role, width: 22}
+      - {header: Holder, width: 18}
+      - {header: Deputy, width: 18}
+      - {header: Reports to, width: 18}
+      - {header: Key responsibilities and authorities, width: 60}
+    examples:
+      - [Head of laboratory, A, Technical manager, Institute director, Overall responsibility; budget; staffing]
+      - [Technical manager, B, Senior analyst C, Head of laboratory, Approves methods and validations; authorises reports; stops and restarts work]
+      - [Quality manager, D, Head of laboratory, Head of laboratory (direct access to director), Runs audits and document control; opens corrective actions]
+  - name: Authorisations
+    rows: 20
+    freeze_first_column: true
+    columns:
+      - {header: Name, width: 18}
+      - {header: Role, width: 16}
+      - {header: Total moisture, width: 12, choices: [Authorised, In training]}
+      - {header: Ash, width: 12, choices: [Authorised, In training]}
+      - {header: Calorific value, width: 12, choices: [Authorised, In training]}
+      - {header: CHNS, width: 12, choices: [Authorised, In training]}
+      - {header: Sampling, width: 12, choices: [Authorised, In training]}
+      - {header: Check results, width: 12, choices: [Authorised, In training]}
+      - {header: Validate methods, width: 12, choices: [Authorised, In training]}
+      - {header: Opinions and conformity statements, width: 14, choices: [Authorised, In training]}
+      - {header: Authorise reports, width: 12, choices: [Authorised, In training]}
+      - {header: Internal auditor, width: 12, choices: [Authorised, In training]}
+    examples:
+      - [C, Senior analyst, Authorised, Authorised, Authorised, Authorised, Authorised, Authorised, null, null, null, Authorised]
+      - [E, Analyst, Authorised, In training, null, null, null, null, null, null, null, null]

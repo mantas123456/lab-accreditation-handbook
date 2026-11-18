@@ -1,0 +1,19 @@
+title: Uncertainty budget
+type: Budget
+description: A bottom-up or mixed uncertainty budget that combines up to 20 sources, chooses k from the effective degrees of freedom and shows each source's share.
+builder: uncertainty_budget
+instructions:
+  - One sheet per method (and per range, if the uncertainty differs across the range). Copy the Budget sheet for each.
+  - "Fill the white columns A to G for each source: its value, its distribution, k (only for a normal value quoted as an expanded uncertainty), the sensitivity coefficient, the degrees of freedom and the unit."
+  - The shaded columns and the summary below the table calculate themselves. Do not type in them.
+  - Sort the rows by share of variance when you review the budget. Spend effort on the largest contributions.
+  - Review the budget at least once a year and after any change to the method, equipment or staff. Record the date and the reviewer.
+  - Compare U with the scatter on your QC chart and your PT results. If U is smaller than what you see in practice, a source is missing.
+  - The example is the moisture-in-wood-pellets budget from handbook chapter 7.6.
+example_value: 7.74
+examples:
+  - [Repeatability (mean of duplicate), 0.071, normal, null, 1, 10, "%"]
+  - [Balance calibration, 0.010, normal, 2, 1, null, "%"]
+  - [Drying temperature 105 ± 2 °C, 0.05, rectangular, null, 1, null, "%"]
+  - [Weighing hot (buoyancy residual), 0.06, rectangular, null, 1, null, "%"]
+  - [Laboratory bias (PT history), 0.08, normal, null, 1, 5, "%"]

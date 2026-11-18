@@ -1,0 +1,46 @@
+title: Proficiency testing plan and results log
+type: Plan
+description: Which PT scheme covers each method in scope and how often, plus a results log that classifies each z-score and flags the ones to investigate.
+instructions:
+  - The Plan sheet has one row per method in your scope. Every method needs PT or another interlaboratory comparison at least once in the accreditation cycle; more often for high-volume or high-risk tests. Check your accreditation body's PT policy for its minimum.
+  - Where no PT scheme exists, plan a comparison with another lab and note it.
+  - The Results sheet logs every round. The classification calculates itself from the z-score; questionable and unsatisfactory results are highlighted and need an investigation reference.
+  - For trends across rounds, labqc's pt_history function or the labqc web app's Proficiency testing page can plot the z-scores.
+sheets:
+  - name: Plan
+    rows: 30
+    columns:
+      - {header: Method, width: 22}
+      - {header: Material, width: 16}
+      - {header: PT scheme or comparison, width: 26}
+      - {header: "Provider accredited (ISO/IEC 17043)?", width: 13, choices: ['Yes', 'No', Comparison]}
+      - {header: Rounds per year, width: 9}
+      - {header: Planned rounds this year, width: 22}
+      - {header: Last round taken part in, width: 12, format: date}
+      - {header: "Covered in the last 12 months?", width: 12, formula: '=IF(G{r}="","",IF(TODAY()-G{r}<=365,"Yes","NO"))'}
+      - {header: Notes, width: 26}
+    highlights:
+      - {formula: '$H2="NO"', color: FFCDD2}
+    examples:
+      - [Total moisture, Wood pellets, Solid biofuel PT scheme X, 'Yes', 2, "March, September", 2026-03-20, null, null]
+      - [Calorific value, Wood pellets, Solid biofuel PT scheme X, 'Yes', 2, "March, September", 2026-03-20, null, null]
+      - [CHNS, Wood chips, Comparison with lab D, Comparison, 1, November, 2025-11-12, null, No PT scheme found for this matrix]
+  - name: Results
+    rows: 60
+    columns:
+      - {header: Round date, width: 12, format: date}
+      - {header: Scheme and round, width: 22}
+      - {header: Method, width: 18}
+      - {header: Our result, width: 10}
+      - {header: Assigned value, width: 10}
+      - {header: SD for proficiency assessment, width: 12}
+      - {header: z-score, width: 9, format: '0.00', formula: '=IF(OR(D{r}="",E{r}="",F{r}=""),"",(D{r}-E{r})/F{r})'}
+      - {header: Classification, width: 15, formula: '=IF(G{r}="","",IF(ABS(G{r})<=2,"Satisfactory",IF(ABS(G{r})<3,"Questionable","Unsatisfactory")))'}
+      - {header: Investigation (NCR number), width: 14}
+      - {header: Notes, width: 26}
+    highlights:
+      - {formula: '$H2="Unsatisfactory"', color: FFCDD2}
+      - {formula: '$H2="Questionable"', color: FFF9C4}
+    examples:
+      - [2026-03-20, Scheme X round 26-1, Total moisture, 7.95, 7.80, 0.20, null, null, null, null]
+      - [2026-03-20, Scheme X round 26-1, Ash, 0.62, 0.50, 0.05, null, null, NCR-26-09, Investigated]

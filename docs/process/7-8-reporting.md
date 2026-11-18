@@ -141,7 +141,7 @@ for name, ppm in [("A", 300), ("B", 315)]:
 
 ## Templates
 
-The test report template arrives in version 0.4.
+<!-- templates -->
 
 ## Tools
 

@@ -174,7 +174,7 @@ print(z, classify(z))                        # 0.75 satisfactory
 
 ## Templates
 
-The PT plan template arrives in version 0.4.
+<!-- templates -->
 
 ## Tools
 

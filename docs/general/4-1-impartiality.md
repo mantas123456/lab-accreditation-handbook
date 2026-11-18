@@ -78,7 +78,7 @@ and that person no longer tests that maker's boilers.
 
 ## Templates
 
-The impartiality risk register arrives in version 0.4.
+<!-- templates -->
 
 ## Tools
 

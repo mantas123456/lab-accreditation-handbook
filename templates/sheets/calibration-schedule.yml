@@ -1,0 +1,31 @@
+title: Calibration schedule
+type: Schedule
+description: When each item is due for calibration, who calibrates it, the acceptance criterion, and whether the last certificate was reviewed; overdue items turn red.
+instructions:
+  - One row per item that needs calibration (see the equipment register). The next due date and the status calculate themselves.
+  - Base the interval on the maker's advice, how much the item is used, how stable it has been and how critical it is. Lengthen or shorten it based on history.
+  - Read every certificate before the item goes back into use. Compare the error plus its uncertainty with your acceptance criterion and record the outcome.
+  - Items overdue turn red; items due within 30 days turn yellow. Never use an overdue item.
+sheets:
+  - name: Schedule
+    rows: 60
+    columns:
+      - {header: Equipment ID, width: 11}
+      - {header: Item, width: 20}
+      - {header: Calibration provider, width: 20}
+      - {header: "Provider accredited for this calibration?", width: 13, choices: ['Yes', 'No']}
+      - {header: Points or range to calibrate, width: 20}
+      - {header: Last calibration, width: 12, format: date}
+      - {header: Interval (months), width: 10}
+      - {header: Next due, width: 12, format: date, formula: '=IF(OR(F{r}="",G{r}=""),"",EDATE(F{r},G{r}))'}
+      - {header: Status, width: 16, formula: '=IF(H{r}="","",IF(H{r}<TODAY(),"OVERDUE",IF(H{r}-TODAY()<=30,"Due within 30 days","OK")))'}
+      - {header: Acceptance criterion, width: 24}
+      - {header: Certificate number, width: 14}
+      - {header: Certificate reviewed (result), width: 22, choices: [Accepted, Accepted with correction, Rejected]}
+      - {header: Reviewed by and date, width: 16}
+    highlights:
+      - {formula: '$I2="OVERDUE"', color: FFCDD2}
+      - {formula: '$I2="Due within 30 days"', color: FFF9C4}
+    examples:
+      - [B-03, Analytical balance, Calibration lab A, 'Yes', 10 g to 200 g, 2026-01-12, 12, null, null, Error + U within ±0.5 mg, C-2026-0113, Accepted, B 2026-01-20]
+      - [T-02, Reference thermometer, Calibration lab B, 'Yes', 0 °C to 150 °C, 2025-11-05, 24, null, null, Error + U within ±0.3 °C at 105 °C, T-2025-877, Accepted with correction, B 2025-11-10]
