@@ -22,10 +22,12 @@ mistakes that most often become findings.
 
 ## What is written so far
 
-This is version 0.2. **All of Part 7, the process clauses, is written**, from
-[7.1 Contract review](process/7-1-contract-review.md) to
-[7.11 Data management](process/7-11-data-management.md). The other parts are
-planned (see the [roadmap](roadmap.md)). Two good places to start:
+This is version 0.3. **Every clause of the standard has a chapter**, from
+[4.1 Impartiality](general/4-1-impartiality.md) to
+[8.9 Management review](management/8-9-management-review.md), plus the
+[Start here](start-here/index.md) guides. All chapters are drafts until they
+have been reviewed (see the [roadmap](roadmap.md)). Two good places to
+start:
 
 - **[7.6 Measurement uncertainty](process/7-6-measurement-uncertainty.md):**
   how to build, check and use an uncertainty budget, worked through for

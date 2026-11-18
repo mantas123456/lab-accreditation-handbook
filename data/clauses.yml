@@ -31,7 +31,7 @@ clauses:
     templates: [Impartiality risk register]
     labqc: []
     related: ["4.2", "5", "8.5"]
-    status: planned
+    status: draft
   - number: "4.2"
     title: Confidentiality
     part: General
@@ -39,7 +39,7 @@ clauses:
     templates: [Confidentiality agreement]
     labqc: []
     related: ["4.1", "7.11", "8.4"]
-    status: planned
+    status: draft
 
   # ---- 5 Structure -----------------------------------------------------
   - number: "5"
@@ -49,7 +49,7 @@ clauses:
     templates: [Organisation chart, Roles and deputies matrix]
     labqc: []
     related: ["4.1", "6.2", "8.2"]
-    status: planned
+    status: draft
 
   # ---- 6 Resources -----------------------------------------------------
   - number: "6.1"
@@ -59,7 +59,7 @@ clauses:
     templates: []
     labqc: []
     related: ["6.2", "6.3", "6.4"]
-    status: planned
+    status: draft
   - number: "6.2"
     title: Personnel, competence and authorisation
     part: Resources
@@ -67,7 +67,7 @@ clauses:
     templates: [Training and authorisation record]
     labqc: []
     related: ["5", "7.2", "8.8"]
-    status: planned
+    status: draft
   - number: "6.3"
     title: Facilities and environmental conditions
     part: Resources
@@ -75,7 +75,7 @@ clauses:
     templates: []
     labqc: []
     related: ["6.4", "7.4", "7.5"]
-    status: planned
+    status: draft
   - number: "6.4"
     title: Equipment
     part: Resources
@@ -85,7 +85,7 @@ clauses:
       - ref: labqc.control_charts.westgard
         app: QC_charts
     related: ["6.5", "7.7", "7.11"]
-    status: planned
+    status: draft
   - number: "6.5"
     title: Metrological traceability
     part: Resources
@@ -93,7 +93,7 @@ clauses:
     templates: [Calibration schedule]
     labqc: []
     related: ["6.4", "7.6", "7.2"]
-    status: planned
+    status: draft
   - number: "6.6"
     title: Externally provided products and services
     part: Resources
@@ -101,7 +101,7 @@ clauses:
     templates: [Supplier evaluation form]
     labqc: []
     related: ["6.4", "6.5", "7.1"]
-    status: planned
+    status: draft
 
   # ---- 7 Process -------------------------------------------------------
   - number: "7.1"
@@ -221,7 +221,7 @@ clauses:
     templates: [Quality manual outline]
     labqc: []
     related: ["8.2", "8.9"]
-    status: planned
+    status: draft
   - number: "8.2"
     title: Management system documentation
     part: Management system
@@ -229,7 +229,7 @@ clauses:
     templates: [Quality manual outline, SOP template]
     labqc: []
     related: ["8.3", "8.1", "5"]
-    status: planned
+    status: draft
   - number: "8.3"
     title: Control of documents
     part: Management system
@@ -237,7 +237,7 @@ clauses:
     templates: [Document master list]
     labqc: []
     related: ["8.2", "8.4"]
-    status: planned
+    status: draft
   - number: "8.4"
     title: Control of records
     part: Management system
@@ -245,7 +245,7 @@ clauses:
     templates: []
     labqc: []
     related: ["7.5", "8.3", "7.11"]
-    status: planned
+    status: draft
   - number: "8.5"
     title: Risks and opportunities
     part: Management system
@@ -253,7 +253,7 @@ clauses:
     templates: [Risk register]
     labqc: []
     related: ["4.1", "8.6", "8.9"]
-    status: planned
+    status: draft
   - number: "8.6"
     title: Improvement
     part: Management system
@@ -261,7 +261,7 @@ clauses:
     templates: []
     labqc: []
     related: ["8.5", "8.7", "8.9"]
-    status: planned
+    status: draft
   - number: "8.7"
     title: Corrective action
     part: Management system
@@ -269,7 +269,7 @@ clauses:
     templates: [NCR/CAPA form]
     labqc: []
     related: ["7.10", "7.9", "8.8"]
-    status: planned
+    status: draft
   - number: "8.8"
     title: Internal audits
     part: Management system
@@ -277,7 +277,7 @@ clauses:
     templates: [Internal audit plan and checklist]
     labqc: []
     related: ["8.7", "8.9", "6.2"]
-    status: planned
+    status: draft
   - number: "8.9"
     title: Management review
     part: Management system
@@ -285,4 +285,4 @@ clauses:
     templates: [Management review agenda and minutes]
     labqc: []
     related: ["8.8", "8.5", "8.6"]
-    status: planned
+    status: draft

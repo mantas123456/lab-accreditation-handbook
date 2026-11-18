@@ -24,6 +24,8 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-docs.txt
       - run: pip install -r requirements-docs.txt
+      - name: Check every clause has a chapter
+        run: python scripts/check_clauses.py
       - run: mkdocs build --strict
       - if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v3

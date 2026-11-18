@@ -15,8 +15,9 @@ Calculations link to [labqc](https://github.com/mantas123456/lab-quality-toolkit
 a Python library and web app for uncertainty budgets, method validation,
 PT scores and QC charts.
 
-**Status:** version 0.2. All of clause 7 (7.1 to 7.11, the process
-requirements) is written as drafts; clauses 4, 5, 6 and 8 are planned. See the [roadmap](https://mantas123456.github.io/lab-accreditation-handbook/roadmap/).
+**Status:** version 0.3. Every clause of ISO/IEC 17025:2017 (4.1 to 8.9)
+has a draft chapter, plus the Start here guides; templates and tools come
+next. See the [roadmap](https://mantas123456.github.io/lab-accreditation-handbook/roadmap/).
 
 > Not official guidance. The handbook never reproduces the text of the
 > standard; it cites clause numbers and explains them in its own words. The
@@ -29,7 +30,8 @@ python -m venv .venv
 # Windows: .venv\Scripts\activate    macOS/Linux: source .venv/bin/activate
 pip install -r requirements-docs.txt
 mkdocs serve            # live preview at http://127.0.0.1:8000
-mkdocs build --strict   # the same check CI runs
+python scripts/check_clauses.py
+mkdocs build --strict   # the same checks CI runs
 ```
 
 ## How it is built
@@ -41,6 +43,9 @@ mkdocs build --strict   # the same check CI runs
 - `docs/_chapter_template.md` is the format every chapter follows.
 - `scripts/make_placeholders.py` creates a "Planned" page for any clause
   that has no chapter yet.
+- `scripts/check_clauses.py` (run in CI) fails if a clause has no chapter,
+  a chapter names the wrong clause, a draft chapter lacks a standard
+  heading, or a chapter is missing from the navigation.
 - `.github/workflows/docs.yml` builds with `--strict` on every push and
   pull request, and deploys `main` to GitHub Pages.
 
