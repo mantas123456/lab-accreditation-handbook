@@ -1,0 +1,284 @@
+# Clause map for the handbook.
+#
+# One entry per ISO/IEC 17025:2017 clause at the level the handbook writes
+# chapters for (one clause, one page). Titles are short labels in our own
+# words, never the wording of the standard.
+#
+# Fields
+#   number    clause number as a string
+#   title     short label in our own words
+#   part      handbook part (General, Structure, Resources, Process, Management system)
+#   chapter   path of the chapter page, relative to docs/
+#   templates list of template names (files arrive in version 0.4)
+#   labqc     list of labqc links, or [] when no calculation is involved
+#               ref: Python name, linked to the labqc API reference
+#               app: page of the labqc web app (optional)
+#               anchor: false to link the module page instead of the function
+#   related   list of related clause numbers
+#   status    planned | draft | reviewed
+#
+# If a new edition of the standard changes the numbering, change this file
+# and the chapter paths; the badges, side panels and clause map follow.
+
+edition: ISO/IEC 17025:2017
+
+clauses:
+  # ---- 4 General -------------------------------------------------------
+  - number: "4.1"
+    title: Impartiality
+    part: General
+    chapter: general/4-1-impartiality.md
+    templates: [Impartiality risk register]
+    labqc: []
+    related: ["4.2", "5", "8.5"]
+    status: planned
+  - number: "4.2"
+    title: Confidentiality
+    part: General
+    chapter: general/4-2-confidentiality.md
+    templates: [Confidentiality agreement]
+    labqc: []
+    related: ["4.1", "7.11", "8.4"]
+    status: planned
+
+  # ---- 5 Structure -----------------------------------------------------
+  - number: "5"
+    title: Legal entity, scope, roles and authority
+    part: Structure
+    chapter: structure/5-structure.md
+    templates: [Organisation chart, Roles and deputies matrix]
+    labqc: []
+    related: ["4.1", "6.2", "8.2"]
+    status: planned
+
+  # ---- 6 Resources -----------------------------------------------------
+  - number: "6.1"
+    title: Resources overview
+    part: Resources
+    chapter: resources/6-1-resources-overview.md
+    templates: []
+    labqc: []
+    related: ["6.2", "6.3", "6.4"]
+    status: planned
+  - number: "6.2"
+    title: Personnel, competence and authorisation
+    part: Resources
+    chapter: resources/6-2-personnel.md
+    templates: [Training and authorisation record]
+    labqc: []
+    related: ["5", "7.2", "8.8"]
+    status: planned
+  - number: "6.3"
+    title: Facilities and environmental conditions
+    part: Resources
+    chapter: resources/6-3-facilities.md
+    templates: []
+    labqc: []
+    related: ["6.4", "7.4", "7.5"]
+    status: planned
+  - number: "6.4"
+    title: Equipment
+    part: Resources
+    chapter: resources/6-4-equipment.md
+    templates: [Equipment register, Calibration schedule]
+    labqc:
+      - ref: labqc.control_charts.westgard
+        app: QC_charts
+    related: ["6.5", "7.7", "7.11"]
+    status: planned
+  - number: "6.5"
+    title: Metrological traceability
+    part: Resources
+    chapter: resources/6-5-traceability.md
+    templates: [Calibration schedule]
+    labqc: []
+    related: ["6.4", "7.6", "7.2"]
+    status: planned
+  - number: "6.6"
+    title: Externally provided products and services
+    part: Resources
+    chapter: resources/6-6-external-providers.md
+    templates: [Supplier evaluation form]
+    labqc: []
+    related: ["6.4", "6.5", "7.1"]
+    status: planned
+
+  # ---- 7 Process -------------------------------------------------------
+  - number: "7.1"
+    title: Review of requests, tenders and contracts
+    part: Process
+    chapter: process/7-1-contract-review.md
+    templates: [Contract review checklist]
+    labqc: []
+    related: ["7.2", "7.8", "6.6"]
+    status: planned
+  - number: "7.2"
+    title: Selecting, verifying and validating methods
+    part: Process
+    chapter: process/7-2-methods.md
+    templates: [Validation plan and report]
+    labqc:
+      - ref: labqc.validation.linearity
+        app: Method_validation
+      - ref: labqc.validation.intermediate_precision
+      - ref: labqc.validation.trueness
+    related: ["7.6", "7.7", "6.2"]
+    status: planned
+  - number: "7.3"
+    title: Sampling
+    part: Process
+    chapter: process/7-3-sampling.md
+    templates: []
+    labqc: []
+    related: ["7.4", "7.6", "7.8"]
+    status: planned
+  - number: "7.4"
+    title: Handling of test and calibration items
+    part: Process
+    chapter: process/7-4-item-handling.md
+    templates: []
+    labqc: []
+    related: ["7.3", "6.3", "7.5"]
+    status: planned
+  - number: "7.5"
+    title: Technical records
+    part: Process
+    chapter: process/7-5-technical-records.md
+    templates: []
+    labqc: []
+    related: ["8.4", "7.11", "7.8"]
+    status: planned
+  - number: "7.6"
+    title: Measurement uncertainty
+    part: Process
+    chapter: process/7-6-measurement-uncertainty.md
+    templates: [Uncertainty budget]
+    labqc:
+      - ref: labqc.uncertainty.combine
+        app: Uncertainty_budget
+      - ref: labqc.uncertainty.type_a
+      - ref: labqc.uncertainty.monte_carlo
+    related: ["7.2", "7.7", "7.8", "6.5"]
+    status: draft
+  - number: "7.7"
+    title: Ensuring the validity of results
+    part: Process
+    chapter: process/7-7-validity-of-results.md
+    templates: [PT plan]
+    labqc:
+      - ref: labqc.control_charts.westgard
+        app: QC_charts
+      - ref: labqc.control_charts.limits_from_data
+      - ref: labqc.proficiency.z_score
+        app: Proficiency_testing
+        anchor: false
+    related: ["7.2", "7.6", "7.10", "6.4"]
+    status: draft
+  - number: "7.8"
+    title: Reporting results
+    part: Process
+    chapter: process/7-8-reporting.md
+    templates: [Test report template]
+    labqc:
+      - ref: labqc.emissions
+        app: Emissions
+    related: ["7.6", "7.1", "7.5"]
+    status: planned
+  - number: "7.9"
+    title: Complaints
+    part: Process
+    chapter: process/7-9-complaints.md
+    templates: [Complaint form]
+    labqc: []
+    related: ["7.10", "8.7", "4.1"]
+    status: planned
+  - number: "7.10"
+    title: Nonconforming work
+    part: Process
+    chapter: process/7-10-nonconforming-work.md
+    templates: [NCR/CAPA form]
+    labqc: []
+    related: ["7.7", "8.7", "7.9"]
+    status: planned
+  - number: "7.11"
+    title: Control of data and information management
+    part: Process
+    chapter: process/7-11-data-management.md
+    templates: [Software validation record]
+    labqc: []
+    related: ["7.5", "8.4", "4.2"]
+    status: planned
+
+  # ---- 8 Management system ---------------------------------------------
+  - number: "8.1"
+    title: Option A or option B
+    part: Management system
+    chapter: management/8-1-options.md
+    templates: [Quality manual outline]
+    labqc: []
+    related: ["8.2", "8.9"]
+    status: planned
+  - number: "8.2"
+    title: Management system documentation
+    part: Management system
+    chapter: management/8-2-documentation.md
+    templates: [Quality manual outline, SOP template]
+    labqc: []
+    related: ["8.3", "8.1", "5"]
+    status: planned
+  - number: "8.3"
+    title: Control of documents
+    part: Management system
+    chapter: management/8-3-document-control.md
+    templates: [Document master list]
+    labqc: []
+    related: ["8.2", "8.4"]
+    status: planned
+  - number: "8.4"
+    title: Control of records
+    part: Management system
+    chapter: management/8-4-records.md
+    templates: []
+    labqc: []
+    related: ["7.5", "8.3", "7.11"]
+    status: planned
+  - number: "8.5"
+    title: Risks and opportunities
+    part: Management system
+    chapter: management/8-5-risks-and-opportunities.md
+    templates: [Risk register]
+    labqc: []
+    related: ["4.1", "8.6", "8.9"]
+    status: planned
+  - number: "8.6"
+    title: Improvement
+    part: Management system
+    chapter: management/8-6-improvement.md
+    templates: []
+    labqc: []
+    related: ["8.5", "8.7", "8.9"]
+    status: planned
+  - number: "8.7"
+    title: Corrective action
+    part: Management system
+    chapter: management/8-7-corrective-action.md
+    templates: [NCR/CAPA form]
+    labqc: []
+    related: ["7.10", "7.9", "8.8"]
+    status: planned
+  - number: "8.8"
+    title: Internal audits
+    part: Management system
+    chapter: management/8-8-internal-audits.md
+    templates: [Internal audit plan and checklist]
+    labqc: []
+    related: ["8.7", "8.9", "6.2"]
+    status: planned
+  - number: "8.9"
+    title: Management review
+    part: Management system
+    chapter: management/8-9-management-review.md
+    templates: [Management review agenda and minutes]
+    labqc: []
+    related: ["8.8", "8.5", "8.6"]
+    status: planned

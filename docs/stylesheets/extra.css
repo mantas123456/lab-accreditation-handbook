@@ -1,0 +1,83 @@
+/* Clause side panel: floats right on wide screens, sits above the text on phones. */
+.md-typeset .clause-panel {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.4rem;
+  padding: 0.6rem 0.9rem;
+  margin: 0 0 1.2rem;
+  font-size: 0.68rem;
+  background: var(--md-code-bg-color);
+}
+
+@media screen and (min-width: 60em) {
+  .md-typeset .clause-panel {
+    float: right;
+    width: 15rem;
+    margin: 0 0 1rem 1.2rem;
+  }
+}
+
+.md-typeset .clause-panel ul {
+  margin: 0.2rem 0 0.4rem;
+  padding-left: 1rem;
+}
+
+.md-typeset .clause-panel li {
+  margin-bottom: 0.15rem;
+}
+
+.md-typeset .clause-panel__head {
+  margin: 0.6rem 0 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.62rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.md-typeset .clause-panel__note {
+  margin: 0.2rem 0;
+  color: var(--md-default-fg-color--light);
+}
+
+.md-typeset .clause-badge {
+  display: inline-block;
+  margin: 0;
+  padding: 0.15rem 0.55rem;
+  border-radius: 1rem;
+  font-weight: 700;
+  font-size: 0.66rem;
+  color: #fff;
+  background: var(--md-primary-fg-color);
+}
+
+.md-typeset .clause-badge--planned {
+  background: var(--md-default-fg-color--light);
+}
+
+.md-typeset .clause-badge--reviewed {
+  background: #2e7d32;
+}
+
+/* Clear the floated panel before footer navigation. */
+.md-content__inner::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* Home page entry buttons wrap on small screens. */
+.md-typeset .entry-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.md-typeset .entry-buttons .md-button {
+  margin: 0;
+}
+
+/* Wide tables scroll inside their box instead of widening the page. */
+.md-typeset__table {
+  max-width: 100%;
+}

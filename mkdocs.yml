@@ -1,0 +1,135 @@
+site_name: Lab Accreditation Handbook
+site_description: A free, practical guide to ISO/IEC 17025 accreditation for testing and calibration labs, with templates and tools.
+site_author: Mantas Valantinavicius
+site_url: https://mantas123456.github.io/lab-accreditation-handbook/
+repo_url: https://github.com/mantas123456/lab-accreditation-handbook
+repo_name: mantas123456/lab-accreditation-handbook
+edit_uri: edit/main/docs/
+copyright: >-
+  Text and templates: CC BY 4.0 · Code: MIT ·
+  Not official guidance; the standard and your accreditation body's documents take priority.
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.suggest
+    - content.action.edit
+    - content.code.copy
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+extra_css:
+  - stylesheets/extra.css
+
+hooks:
+  - hooks/clauses.py
+
+exclude_docs: |
+  _chapter_template.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js
+
+validation:
+  nav:
+    omitted_files: warn
+    not_found: warn
+  links:
+    not_found: warn
+    anchors: warn
+
+nav:
+  - Home: index.md
+  - Start here:
+      - start-here/index.md
+      - How to use this handbook: start-here/how-to-use.md
+      - What accreditation is: start-here/what-is-accreditation.md
+      - The accreditation journey: start-here/journey.md
+      - Accreditation in Malta: start-here/malta.md
+      - Clause map: clause-map.md
+      - Roadmap: roadmap.md
+  - 4 General:
+      - 4.1 Impartiality: general/4-1-impartiality.md
+      - 4.2 Confidentiality: general/4-2-confidentiality.md
+  - 5 Structure:
+      - 5 Structure: structure/5-structure.md
+  - 6 Resources:
+      - 6.1 Resources overview: resources/6-1-resources-overview.md
+      - 6.2 Personnel: resources/6-2-personnel.md
+      - 6.3 Facilities: resources/6-3-facilities.md
+      - 6.4 Equipment: resources/6-4-equipment.md
+      - 6.5 Traceability: resources/6-5-traceability.md
+      - 6.6 External providers: resources/6-6-external-providers.md
+  - 7 Process:
+      - 7.1 Contract review: process/7-1-contract-review.md
+      - 7.2 Methods: process/7-2-methods.md
+      - 7.3 Sampling: process/7-3-sampling.md
+      - 7.4 Item handling: process/7-4-item-handling.md
+      - 7.5 Technical records: process/7-5-technical-records.md
+      - 7.6 Measurement uncertainty: process/7-6-measurement-uncertainty.md
+      - 7.7 Validity of results: process/7-7-validity-of-results.md
+      - 7.8 Reporting: process/7-8-reporting.md
+      - 7.9 Complaints: process/7-9-complaints.md
+      - 7.10 Nonconforming work: process/7-10-nonconforming-work.md
+      - 7.11 Data management: process/7-11-data-management.md
+  - 8 Management system:
+      - 8.1 Options A and B: management/8-1-options.md
+      - 8.2 Documentation: management/8-2-documentation.md
+      - 8.3 Document control: management/8-3-document-control.md
+      - 8.4 Records: management/8-4-records.md
+      - 8.5 Risks and opportunities: management/8-5-risks-and-opportunities.md
+      - 8.6 Improvement: management/8-6-improvement.md
+      - 8.7 Corrective action: management/8-7-corrective-action.md
+      - 8.8 Internal audits: management/8-8-internal-audits.md
+      - 8.9 Management review: management/8-9-management-review.md
+  - Field notes: field-notes/index.md
+  - Templates: template-library/index.md
+  - Tools: tools/index.md
+  - Glossary: glossary.md
+  - About: about.md
