@@ -20,10 +20,12 @@ mistakes that most often become findings.
 [Looking for a template](template-library/index.md){ .md-button }
 </div>
 
-## Start with a finished chapter
+## What is written so far
 
-This is version 0.1. Two chapters are written in full; the rest are planned
-(see the [roadmap](roadmap.md)).
+This is version 0.2. **All of Part 7, the process clauses, is written**, from
+[7.1 Contract review](process/7-1-contract-review.md) to
+[7.11 Data management](process/7-11-data-management.md). The other parts are
+planned (see the [roadmap](roadmap.md)). Two good places to start:
 
 - **[7.6 Measurement uncertainty](process/7-6-measurement-uncertainty.md):**
   how to build, check and use an uncertainty budget, worked through for

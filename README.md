@@ -15,9 +15,8 @@ Calculations link to [labqc](https://github.com/mantas123456/lab-quality-toolkit
 a Python library and web app for uncertainty budgets, method validation,
 PT scores and QC charts.
 
-**Status:** version 0.1. Two chapters are written in full
-(7.6 Measurement uncertainty, 7.7 Ensuring the validity of results); the
-rest are planned. See the [roadmap](https://mantas123456.github.io/lab-accreditation-handbook/roadmap/).
+**Status:** version 0.2. All of clause 7 (7.1 to 7.11, the process
+requirements) is written as drafts; clauses 4, 5, 6 and 8 are planned. See the [roadmap](https://mantas123456.github.io/lab-accreditation-handbook/roadmap/).
 
 > Not official guidance. The handbook never reproduces the text of the
 > standard; it cites clause numbers and explains them in its own words. The

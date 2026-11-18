@@ -111,7 +111,7 @@ clauses:
     templates: [Contract review checklist]
     labqc: []
     related: ["7.2", "7.8", "6.6"]
-    status: planned
+    status: draft
   - number: "7.2"
     title: Selecting, verifying and validating methods
     part: Process
@@ -122,8 +122,9 @@ clauses:
         app: Method_validation
       - ref: labqc.validation.intermediate_precision
       - ref: labqc.validation.trueness
+      - ref: labqc.validation.lod_loq
     related: ["7.6", "7.7", "6.2"]
-    status: planned
+    status: draft
   - number: "7.3"
     title: Sampling
     part: Process
@@ -131,7 +132,7 @@ clauses:
     templates: []
     labqc: []
     related: ["7.4", "7.6", "7.8"]
-    status: planned
+    status: draft
   - number: "7.4"
     title: Handling of test and calibration items
     part: Process
@@ -139,7 +140,7 @@ clauses:
     templates: []
     labqc: []
     related: ["7.3", "6.3", "7.5"]
-    status: planned
+    status: draft
   - number: "7.5"
     title: Technical records
     part: Process
@@ -147,7 +148,7 @@ clauses:
     templates: []
     labqc: []
     related: ["8.4", "7.11", "7.8"]
-    status: planned
+    status: draft
   - number: "7.6"
     title: Measurement uncertainty
     part: Process
@@ -180,10 +181,13 @@ clauses:
     chapter: process/7-8-reporting.md
     templates: [Test report template]
     labqc:
-      - ref: labqc.emissions
+      - ref: labqc.emissions.correct_emission
         app: Emissions
+      - ref: labqc.emissions.corrected_uncertainty
+      - ref: labqc.uncertainty.combine
+        app: Uncertainty_budget
     related: ["7.6", "7.1", "7.5"]
-    status: planned
+    status: draft
   - number: "7.9"
     title: Complaints
     part: Process
@@ -191,7 +195,7 @@ clauses:
     templates: [Complaint form]
     labqc: []
     related: ["7.10", "8.7", "4.1"]
-    status: planned
+    status: draft
   - number: "7.10"
     title: Nonconforming work
     part: Process
@@ -199,7 +203,7 @@ clauses:
     templates: [NCR/CAPA form]
     labqc: []
     related: ["7.7", "8.7", "7.9"]
-    status: planned
+    status: draft
   - number: "7.11"
     title: Control of data and information management
     part: Process
@@ -207,7 +211,7 @@ clauses:
     templates: [Software validation record]
     labqc: []
     related: ["7.5", "8.4", "4.2"]
-    status: planned
+    status: draft
 
   # ---- 8 Management system ---------------------------------------------
   - number: "8.1"
