@@ -14,7 +14,6 @@ theme:
   language: en
   features:
     - navigation.tabs
-    - navigation.sections
     - navigation.indexes
     - navigation.top
     - navigation.footer
@@ -41,6 +40,15 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+
+# Page status icons in the navigation. The hook sets each chapter's status
+# from data/clauses.yml; icons are in docs/stylesheets/extra.css.
+extra:
+  status:
+    planned: "Planned: not written yet"
+    draft: "Draft: written, not yet reviewed by a second practitioner"
+    examples-checked: "Examples checked: numbers re-run by code on every build"
+    reviewed: "Reviewed: checked by a practising quality manager or assessor"
 
 extra_css:
   - stylesheets/extra.css
@@ -95,45 +103,50 @@ nav:
       - Accreditation in Malta: start-here/malta.md
       - Clause map: clause-map.md
       - Roadmap: roadmap.md
-  - 4 General:
-      - 4.1 Impartiality: general/4-1-impartiality.md
-      - 4.2 Confidentiality: general/4-2-confidentiality.md
-  - 5 Structure:
+  - ISO/IEC 17025 clauses:
+      - 4 General:
+          - 4.1 Impartiality: general/4-1-impartiality.md
+          - 4.2 Confidentiality: general/4-2-confidentiality.md
       - 5 Structure: structure/5-structure.md
-  - 6 Resources:
-      - 6.1 Resources overview: resources/6-1-resources-overview.md
-      - 6.2 Personnel: resources/6-2-personnel.md
-      - 6.3 Facilities: resources/6-3-facilities.md
-      - 6.4 Equipment: resources/6-4-equipment.md
-      - 6.5 Traceability: resources/6-5-traceability.md
-      - 6.6 External providers: resources/6-6-external-providers.md
-  - 7 Process:
-      - 7.1 Contract review: process/7-1-contract-review.md
-      - 7.2 Methods: process/7-2-methods.md
-      - 7.3 Sampling: process/7-3-sampling.md
-      - 7.4 Item handling: process/7-4-item-handling.md
-      - 7.5 Technical records: process/7-5-technical-records.md
-      - 7.6 Measurement uncertainty: process/7-6-measurement-uncertainty.md
-      - 7.7 Validity of results: process/7-7-validity-of-results.md
-      - 7.8 Reporting: process/7-8-reporting.md
-      - 7.9 Complaints: process/7-9-complaints.md
-      - 7.10 Nonconforming work: process/7-10-nonconforming-work.md
-      - 7.11 Data management: process/7-11-data-management.md
-  - 8 Management system:
-      - 8.1 Options A and B: management/8-1-options.md
-      - 8.2 Documentation: management/8-2-documentation.md
-      - 8.3 Document control: management/8-3-document-control.md
-      - 8.4 Records: management/8-4-records.md
-      - 8.5 Risks and opportunities: management/8-5-risks-and-opportunities.md
-      - 8.6 Improvement: management/8-6-improvement.md
-      - 8.7 Corrective action: management/8-7-corrective-action.md
-      - 8.8 Internal audits: management/8-8-internal-audits.md
-      - 8.9 Management review: management/8-9-management-review.md
-  - Field notes: field-notes/index.md
-  - Templates: template-library/index.md
-  - Tools:
-      - tools/index.md
+      - 6 Resources:
+          - 6.1 Resources overview: resources/6-1-resources-overview.md
+          - 6.2 Personnel: resources/6-2-personnel.md
+          - 6.3 Facilities: resources/6-3-facilities.md
+          - 6.4 Equipment: resources/6-4-equipment.md
+          - 6.5 Traceability: resources/6-5-traceability.md
+          - 6.6 External providers: resources/6-6-external-providers.md
+      - 7 Process:
+          - 7.1 Contract review: process/7-1-contract-review.md
+          - 7.2 Methods: process/7-2-methods.md
+          - 7.3 Sampling: process/7-3-sampling.md
+          - 7.4 Item handling: process/7-4-item-handling.md
+          - 7.5 Technical records: process/7-5-technical-records.md
+          - 7.6 Measurement uncertainty: process/7-6-measurement-uncertainty.md
+          - 7.7 Validity of results: process/7-7-validity-of-results.md
+          - 7.8 Reporting: process/7-8-reporting.md
+          - 7.9 Complaints: process/7-9-complaints.md
+          - 7.10 Nonconforming work: process/7-10-nonconforming-work.md
+          - 7.11 Data management: process/7-11-data-management.md
+      - 8 Management system:
+          - 8.1 Options A and B: management/8-1-options.md
+          - 8.2 Documentation: management/8-2-documentation.md
+          - 8.3 Document control: management/8-3-document-control.md
+          - 8.4 Records: management/8-4-records.md
+          - 8.5 Risks and opportunities: management/8-5-risks-and-opportunities.md
+          - 8.6 Improvement: management/8-6-improvement.md
+          - 8.7 Corrective action: management/8-7-corrective-action.md
+          - 8.8 Internal audits: management/8-8-internal-audits.md
+          - 8.9 Management review: management/8-9-management-review.md
+  - Templates & tools:
+      - template-library/index.md
+      - Tools: tools/index.md
       - Gap analysis: tools/gap-analysis.md
       - Audit planner: tools/audit-planner.md
-  - Glossary: glossary.md
-  - About: about.md
+  - Field notes:
+      - field-notes/index.md
+      - Ten common findings: field-notes/common-findings.md
+      - Preparing for the assessment: field-notes/preparing-for-the-assessment.md
+      - After the assessment: field-notes/after-the-assessment.md
+  - Reference:
+      - Glossary: glossary.md
+      - About: about.md

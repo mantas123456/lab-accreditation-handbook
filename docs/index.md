@@ -23,23 +23,46 @@ mistakes that most often become findings.
 
 ## What is written so far
 
-This is version 0.5. **Every clause of the standard has a chapter**, there
-are **24 editable [templates](template-library/index.md)** in Word and Excel,
-and two free browser tools: a [gap analysis](tools/gap-analysis.md) that
-scores your readiness clause by clause, and an
-[internal audit planner](tools/audit-planner.md). Chapters run from
-[4.1 Impartiality](general/4-1-impartiality.md) to
-[8.9 Management review](management/8-9-management-review.md), plus the
-[Start here](start-here/index.md) guides. All chapters are drafts until they
-have been reviewed (see the [roadmap](roadmap.md)). Two good places to
-start:
+This is version 0.5. What is done:
 
-- **[7.6 Measurement uncertainty](process/7-6-measurement-uncertainty.md):**
-  how to build, check and use an uncertainty budget, worked through for
-  moisture in wood pellets.
-- **[7.7 Ensuring the validity of results](process/7-7-validity-of-results.md):**
-  control samples, Westgard rules and proficiency testing, with a drift
-  that a quick look at the chart would miss.
+- **A chapter for every clause** of the standard, from
+  [4.1 Impartiality](general/4-1-impartiality.md) to
+  [8.9 Management review](management/8-9-management-review.md), plus the
+  [Start here](start-here/index.md) guides.
+- **<!-- template-count --> editable [templates](template-library/index.md)**
+  in Word and Excel, one by one or all in a single zip.
+- **Two free browser tools:** a [gap analysis](tools/gap-analysis.md) that
+  scores your readiness clause by clause, and an
+  [internal audit planner](tools/audit-planner.md).
+- **Four chapters whose worked examples are checked by code:**
+  [7.2](process/7-2-methods.md), [7.6](process/7-6-measurement-uncertainty.md),
+  [7.7](process/7-7-validity-of-results.md) and [7.8](process/7-8-reporting.md).
+  Every build of the site re-runs the code behind their numbers and stops
+  if a result no longer matches.
+
+No chapter has yet been reviewed by a second practitioner: the label next to
+each page says where it stands (see the [clause map](clause-map.md)), and the
+[roadmap](roadmap.md) says what comes next. Good places to start:
+
+<div class="grid cards" markdown>
+
+-   **[7.6 Measurement uncertainty](process/7-6-measurement-uncertainty.md)**
+
+    How to build, check and use an uncertainty budget, worked through for
+    moisture in wood pellets.
+
+-   **[7.7 Ensuring the validity of results](process/7-7-validity-of-results.md)**
+
+    Control samples, Westgard rules and proficiency testing, with a drift
+    that a quick look at the chart would miss.
+
+-   **[Field notes](field-notes/index.md)**
+
+    - [Ten common findings across the clauses](field-notes/common-findings.md)
+    - [Preparing for the on-site assessment](field-notes/preparing-for-the-assessment.md)
+    - [After the assessment](field-notes/after-the-assessment.md)
+
+</div>
 
 ## How the handbook is organised
 
@@ -62,7 +85,7 @@ tools and status.
 
 Chapters that need maths link to
 [labqc](https://github.com/mantas123456/lab-quality-toolkit), a free Python
-library and [web app](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app)
+library and [web app](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app) (the free app may take about 30 seconds to wake up)
 for uncertainty budgets, method validation, PT scores and QC charts. The
 handbook explains what to do and why; labqc does the numbers.
 

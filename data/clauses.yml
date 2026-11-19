@@ -15,7 +15,14 @@
 #               app: page of the labqc web app (optional)
 #               anchor: false to link the module page instead of the function
 #   related   list of related clause numbers
-#   status    planned | draft | reviewed
+#   status    planned | draft | examples-checked | reviewed
+#               draft             written, not yet reviewed by a second practitioner
+#               examples-checked  draft text, but every number in the worked example is
+#                                 reproduced by a Python block that CI runs
+#                                 (tests/test_docs_snippets.py)
+#               reviewed          checked by a practising quality manager or assessor
+#             The hook shows it in the side panel, the clause map and the navigation;
+#             never set status in a chapter's front matter.
 #
 # If a new edition of the standard changes the numbering, change this file
 # and the chapter paths; the badges, side panels and clause map follow.
@@ -124,7 +131,7 @@ clauses:
       - ref: labqc.validation.trueness
       - ref: labqc.validation.lod_loq
     related: ["7.6", "7.7", "6.2"]
-    status: draft
+    status: examples-checked
   - number: "7.3"
     title: Sampling
     part: Process
@@ -160,7 +167,7 @@ clauses:
       - ref: labqc.uncertainty.type_a
       - ref: labqc.uncertainty.monte_carlo
     related: ["7.2", "7.7", "7.8", "6.5"]
-    status: draft
+    status: examples-checked
   - number: "7.7"
     title: Ensuring the validity of results
     part: Process
@@ -174,7 +181,7 @@ clauses:
         app: Proficiency_testing
         anchor: false
     related: ["7.2", "7.6", "7.10", "6.4"]
-    status: draft
+    status: examples-checked
   - number: "7.8"
     title: Reporting results
     part: Process
@@ -187,7 +194,7 @@ clauses:
       - ref: labqc.uncertainty.combine
         app: Uncertainty_budget
     related: ["7.6", "7.1", "7.5"]
-    status: draft
+    status: examples-checked
   - number: "7.9"
     title: Complaints
     part: Process

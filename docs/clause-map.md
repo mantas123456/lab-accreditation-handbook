@@ -12,3 +12,8 @@ This table is generated from `data/clauses.yml`, the same file that builds
 each chapter's side panel.
 
 <!-- clause-map -->
+
+**Status:** *Draft* means written but not yet reviewed by a second
+practitioner; *Examples checked* means draft text whose worked-example
+numbers are re-run by code on every build; *Reviewed* means checked by a
+practising quality manager or assessor (no chapter has reached this yet).

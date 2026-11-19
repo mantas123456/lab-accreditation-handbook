@@ -3,7 +3,10 @@
 Fails (exit code 1) when:
 - a clause in clauses.yml has no chapter file;
 - a chapter's front matter names a different clause, or none;
-- a chapter marked draft or reviewed is missing one of the standard headings;
+- a chapter marked draft, examples-checked or reviewed is missing one of the
+  standard headings;
+- a chapter marked examples-checked has no Python block for the snippet test;
+- a chapter sets its status in front matter instead of in clauses.yml;
 - a chapter file in a clause folder is not listed in clauses.yml;
 - a chapter is not in the mkdocs.yml navigation.
 
@@ -69,10 +72,17 @@ def main() -> int:
         fm_clause = str(front_matter(text).get("clause", ""))
         if fm_clause != num:
             errors.append(f"{chapter}: front matter clause is {fm_clause or 'missing'}, expected {num}")
-        if c["status"] in ("draft", "reviewed"):
+        if c["status"] in ("draft", "examples-checked", "reviewed"):
             for h in HEADINGS:
                 if not re.search(rf"^## {re.escape(h)}\s*$", text, re.M):
                     errors.append(f"{chapter}: status {c['status']} but heading '## {h}' is missing")
+        if c["status"] == "examples-checked" and not re.search(r"^\s*```python\s*$", text, re.M):
+            errors.append(
+                f"{chapter}: status examples-checked but the chapter has no ```python block "
+                "for tests/test_docs_snippets.py to run"
+            )
+        if "status" in front_matter(text):
+            errors.append(f"{chapter}: remove 'status' from the front matter; it lives in data/clauses.yml")
         if chapter not in nav:
             errors.append(f"{chapter}: not in the mkdocs.yml nav")
 

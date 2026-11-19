@@ -28,7 +28,7 @@ this browser and can save it to a file.
 For uncertainty budgets, method validation, PT scores and QC charts, use
 [labqc](https://github.com/mantas123456/lab-quality-toolkit), a free Python
 library, or its [web app](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app),
-which needs no installation. Each chapter's side panel links to the right
+which needs no installation; the free app may take about 30 seconds to wake up. Each chapter's side panel links to the right
 labqc function.
 
 ## Third-party code

@@ -12,6 +12,8 @@ Markers replaced on any page:
 
     <!-- clause-map -->        the full clause table
     <!-- template-library -->  every downloadable template
+    <!-- template-count -->    the number of templates in the pack
+    <!-- template-pack -->     a button to download every template as one zip
     <!-- templates -->         on a chapter: links to that clause's templates
 
 Before each build, templates whose sources changed are rebuilt into
@@ -35,7 +37,14 @@ import build_templates  # noqa: E402
 
 LABQC_DOCS = "https://mantas123456.github.io/lab-quality-toolkit/api/"
 LABQC_APP = "https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/"
-STATUS_LABEL = {"planned": "Planned", "draft": "Draft", "reviewed": "Reviewed"}
+# Status keys must also be defined under extra.status in mkdocs.yml (nav tooltips)
+# and have an icon in docs/stylesheets/extra.css.
+STATUS_LABEL = {
+    "planned": "Planned",
+    "draft": "Draft",
+    "examples-checked": "Examples checked",
+    "reviewed": "Reviewed",
+}
 FORMAT_LABEL = {"docx": "Word", "xlsx": "Excel"}
 
 _data: dict = {}
@@ -62,6 +71,10 @@ def load_clauses(root: Path) -> dict:
 
 def on_config(config, **kwargs):
     _data.update(load_clauses(ROOT))
+    defined = set((config.extra or {}).get("status") or {})
+    missing = sorted(set(STATUS_LABEL) - defined)
+    if missing:
+        raise PluginError(f"mkdocs.yml: extra.status has no tooltip for {', '.join(missing)}")
     try:
         templates = {t["id"]: t for t in build_templates.catalog()}
     except ValueError as e:
@@ -75,8 +88,26 @@ def on_config(config, **kwargs):
 
 
 def on_pre_build(config, **kwargs):
-    # Only stale files are rebuilt, so `mkdocs serve` does not loop on its own output.
+    # Only stale files are rebuilt, and the zip is rewritten only when its
+    # content changed, so `mkdocs serve` does not loop on its own output.
     build_templates.build(quiet=True)
+    import json
+
+    # Written by build_templates.write_pack(): template count and zip size.
+    _data["pack"] = json.loads(build_templates.PACK_DATA.read_text(encoding="utf-8"))
+
+
+def _size(n: int) -> str:
+    return f"{n / 1024 / 1024:.1f} MB" if n >= 1024 * 1024 else f"{round(n / 1024)} KB"
+
+
+def _pack_button(page_path: str) -> str:
+    pack = _data["pack"]
+    href = _link(page_path, pack["zip"])
+    return (
+        f"[Download all {pack['count']} templates (.zip, {_size(pack['bytes'])})]({href})"
+        "{ .md-button .md-button--primary }"
+    )
 
 
 def _link(from_page: str, to_doc: str) -> str:
@@ -102,7 +133,10 @@ def _labqc_items(entries: list[dict]) -> list[str]:
         anchor = "" if ref.count(".") == 1 or e.get("anchor") is False else f"#{ref}"
         line = f'<a href="{LABQC_DOCS}{module}/{anchor}"><code>{html.escape(ref)}</code></a>'
         if e.get("app"):
-            line += f' · <a href="{LABQC_APP}{e["app"]}">open in the labqc app</a>'
+            line += (
+                f' · <a href="{LABQC_APP}{e["app"]}">open in the labqc app</a>'
+                ' <span class="clause-panel__note">(free; may take about 30 seconds to wake up)</span>'
+            )
         items.append(f"<li>{line}</li>")
     return items
 
@@ -235,8 +269,14 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
         markdown = markdown.replace("<!-- tool-data -->", _tool_data(page))
     if "<!-- clause-map -->" in markdown:
         markdown = markdown.replace("<!-- clause-map -->", _clause_map(path))
+    if "<!-- template-count -->" in markdown:
+        markdown = markdown.replace("<!-- template-count -->", str(_data["pack"]["count"]))
+    if "<!-- template-pack -->" in markdown:
+        markdown = markdown.replace("<!-- template-pack -->", _pack_button(path))
     if "<!-- template-library -->" in markdown:
         markdown = markdown.replace("<!-- template-library -->", _template_library(path))
+    if "status" in page.meta:
+        raise PluginError(f"{path}: remove 'status' from the front matter; it is set from data/clauses.yml")
     number = page.meta.get("clause")
     if number is None:
         return markdown
@@ -245,6 +285,9 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
         raise PluginError(f"{path}: front matter names clause {number}, which is not in clauses.yml")
     if clause["chapter"] != path:
         raise PluginError(f"{path}: clauses.yml says clause {number} lives at {clause['chapter']}")
+    # Material shows page.meta.status as an icon in the navigation, with the
+    # tooltip from extra.status in mkdocs.yml.
+    page.meta["status"] = clause["status"]
     if "<!-- templates -->" in markdown:
         markdown = markdown.replace("<!-- templates -->", _chapter_templates(clause, path))
     insert = _panel(clause, path)
