@@ -1,5 +1,7 @@
 -r requirements-docs.txt
 pytest>=8
 formulas>=1.2      # recalculates the Excel formulas in tests
-labqc>=1.0         # reference calculation for the uncertainty budget test
+labqc>=1.0,<2     # lab-quality-toolkit (github.com/mantas123456/lab-quality-toolkit), on PyPI;
+                   # reference for the uncertainty budget test and runs the docs' Python blocks.
+                   # <2: a major release could change the numbers the chapters print.
 pytest-playwright>=0.5  # browser tests for the tools (then: python -m playwright install chromium)

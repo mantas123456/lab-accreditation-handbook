@@ -4,6 +4,11 @@ description: Every editable Word and Excel template in the handbook, with its ty
 
 # Templates library
 
+<!-- template-pack -->
+
+The zip holds every template below, plus a README with the licence and the
+clauses each file supports.
+
 Editable templates for a small testing or calibration lab, free under
 [CC BY 4.0](../about.md#licence): use and adapt them, including commercially,
 with credit. Each one is linked from the chapter for its clause.

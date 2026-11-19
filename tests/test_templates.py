@@ -165,3 +165,48 @@ def test_uncertainty_budget_matches_labqc(built, tmp_path, case):
         assert cell("k") >= expected.k - 1e-9
     assert cell("U") == pytest.approx(cell("k") * expected.combined, rel=1e-9)
     assert cell("U_rel") == pytest.approx(cell("U") / spec["value"], rel=1e-9)
+
+
+# ---------------------------------------------------------------- template pack (zip)
+
+
+def test_pack_has_every_template_and_a_readme(built):
+    import io
+    import json
+    import zipfile
+
+    from docx import Document
+    from openpyxl import load_workbook
+
+    assert bt.PACK.exists(), bt.PACK
+    with zipfile.ZipFile(bt.PACK) as z:
+        names = z.namelist()
+        expected = sorted(bt.output_path(t).name for t in built)
+        assert names == ["README.txt", *expected], names
+        for t in built:
+            data = io.BytesIO(z.read(bt.output_path(t).name))
+            if t["format"] == "docx":
+                assert t["title"] in "\n".join(p.text for p in Document(data).paragraphs)
+            else:
+                assert load_workbook(data)["About"]["A1"].value == t["title"]
+        readme = z.read("README.txt").decode("utf-8")
+    assert "CC BY 4.0" in readme and "Adapt before use".upper() in readme and bt.SITE in readme
+    for name in expected:
+        assert name in readme, f"README.txt does not list {name}"
+    assert "7.6 Measurement uncertainty" in readme  # clauses come from data/clauses.yml
+
+    info = json.loads(bt.PACK_DATA.read_text(encoding="utf-8"))
+    assert info["count"] == len(built)
+    assert info["bytes"] == bt.PACK.stat().st_size
+
+
+def test_pack_is_reproducible(built, tmp_path):
+    """Rebuilding unchanged templates gives byte-identical files and zip."""
+    for fmt in ("docx", "xlsx"):
+        t = next(t for t in built if t["format"] == fmt)
+        out = tmp_path / f"again.{fmt}"
+        (bt.build_docx if fmt == "docx" else bt.build_xlsx)(t, out)
+        bt.normalise_ooxml(out)
+        assert out.read_bytes() == bt.output_path(t).read_bytes(), f"{t['id']}.{fmt} differs between builds"
+    templates = sorted(built, key=lambda t: bt.output_path(t).name)
+    assert bt.pack_bytes(templates) == bt.PACK.read_bytes()

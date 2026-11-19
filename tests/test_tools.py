@@ -154,7 +154,10 @@ def test_gap_save_reset_load(gap):
     gap.click("#reset")
     assert gap.locator("[data-score-for='4.1']").get_attribute("data-score") == ""
     gap.set_input_files("#load-json", str(saved))
-    assert gap.locator("[data-score-for='4.1']").get_attribute("data-score") == "0.625"
+    # The file is read asynchronously (FileReader), so wait for the score.
+    from playwright.sync_api import expect
+
+    expect(gap.locator("[data-score-for='4.1']")).to_have_attribute("data-score", "0.625")
 
 
 @pytest.fixture()

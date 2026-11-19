@@ -39,6 +39,11 @@ amendment.
 - **Amended reports** that are clearly identified, give the reason for the
   change, and refer to the report they replace.
 
+*Calibration labs:* a calibration certificate has extra content of its own,
+any within-specification statement must allow for the uncertainty, and it
+gives no recalibration interval unless the customer agreed to one (see
+[testing labs and calibration labs](../start-here/how-to-use.md#testing-labs-and-calibration-labs)).
+
 ## Decision rules
 
 A decision rule says how uncertainty is taken into account when you state
@@ -120,10 +125,20 @@ for name, ppm in [("A", 300), ("B", 315)]:
     r = correct_emission(ppm, "CO", "ppm", o2_measured=12.0, o2_ref=10.0, limit=500)
     c_ref, unc = corrected_uncertainty(r.mg_m3_dry, 0.04 * r.mg_m3_dry, 12.0, 0.15, k=2)
     guarded_pass = c_ref <= 500 - unc.expanded
-    print(name, round(c_ref), round(unc.expanded), guarded_pass)
-# A 459 40 True
-# B 482 42 False
+    print(name, round(r.mg_m3_dry), round(r.correction_factor, 3), round(c_ref),
+          round(unc.expanded), f"{r.percent_of_limit:.0f}%", round(500 - unc.expanded), guarded_pass)
+# A 375 1.225 459 40 92% 460 True
+# B 394 1.225 482 42 96% 458 False
+
+print(unc.table[["component", "share_of_variance"]].round(2).to_string(index=False))
+#     component  share_of_variance
+# Concentration               0.85
+#   Measured O2               0.15
 ```
+
+The columns are: mg/m³ before the O<sub>2</sub> correction, the
+correction factor, the corrected result, *U*, the percentage of the limit,
+limit − *U*, and whether guarded acceptance gives a clear pass.
 
 ## Common findings
 
@@ -150,7 +165,7 @@ for name, ppm in [("A", 300), ("B", 315)]:
   call, with percentage of limit.
 - [`labqc.emissions.corrected_uncertainty`](https://mantas123456.github.io/lab-quality-toolkit/api/emissions/#labqc.emissions.corrected_uncertainty):
   uncertainty through the O<sub>2</sub> correction.
-- [The labqc web app, Emissions page](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Emissions).
+- [The labqc web app, Emissions page](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Emissions) (the free app may take about 30 seconds to wake up).
 
 ## Related clauses
 

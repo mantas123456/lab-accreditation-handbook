@@ -7,6 +7,30 @@ colleague a link to exactly the page that matches an audit finding or a
 question. The clause number is in the page title and in the badge at the top
 of the side panel.
 
+## Testing labs and calibration labs
+
+!!! info "Written mainly for testing labs"
+    The worked examples and the tools look at things mainly from a testing
+    lab's point of view. Calibration labs work to the same clauses, but
+    three of them play out quite differently:
+
+    - **[6.5 Traceability](../resources/6-5-traceability.md):** a
+      calibration lab is itself a link in the chain. It must be able to show
+      how each calibration it offers descends, step by step, from its own
+      reference standards back to national standards: its calibration
+      hierarchy.
+    - **[7.6 Measurement uncertainty](../process/7-6-measurement-uncertainty.md):**
+      every calibration needs its own uncertainty, not one estimate per
+      method. The scope of accreditation states the lab's calibration and
+      measurement capability (CMC), the smallest uncertainty it may claim
+      for each quantity and range, and no certificate may claim better.
+    - **[7.8 Reporting](../process/7-8-reporting.md):** a calibration
+      certificate has its own list of content, with the uncertainty given
+      alongside the results. A statement that an instrument is within
+      specification has to allow for that uncertainty, and the certificate
+      should not recommend when to recalibrate unless the customer has
+      agreed to it.
+
 ## The same headings on every page
 
 1. **In one sentence:** the requirement in plain English.
@@ -32,7 +56,13 @@ always the same as the [clause map](../clause-map.md).
 
 - **Planned**: not written yet.
 - **Draft**: written, not yet reviewed by a second practitioner.
-- **Reviewed**: checked by a practising quality manager or assessor.
+- **Examples checked**: still a draft, but every number in the worked
+  example is re-run by code on every build of the site.
+- **Reviewed**: checked by a practising quality manager or assessor. No
+  chapter has reached this yet.
+
+The same status shows as a small icon next to each chapter in the
+navigation; hover over it for its meaning.
 
 ## Where to begin
 

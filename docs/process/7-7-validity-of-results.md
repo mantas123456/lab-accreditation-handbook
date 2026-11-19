@@ -98,7 +98,7 @@ The next 13 runs:
 | 4 | 8.24 | 0.47 | – | accept |
 | 5 | 8.31 | 1.14 | – | accept |
 | 6 | 8.33 | 1.33 | – | accept |
-| 7 | 8.32 | 1.24 | – | accept |
+| 7 | 8.32 | 1.23 | – | accept |
 | **8** | **8.36** | **1.62** | **4<sub>1s</sub>** | **reject** |
 | 9 | 8.18 | −0.11 | – | accept |
 | 10 | 8.22 | 0.28 | – | accept |
@@ -146,15 +146,60 @@ from labqc.proficiency import z_score, classify
 
 baseline = [8.21, 8.05, 8.33, 8.17, 8.28, 8.02, 8.24, 8.11, 8.36, 8.19,
             8.30, 8.08, 8.20, 8.13, 8.27, 8.04, 8.25, 8.15, 8.34, 8.10]
-limits = limits_from_data(baseline)          # centre 8.19, SD 0.10
+limits = limits_from_data(baseline)
+print(f"{limits.centre:.2f} {limits.sd:.2f}")                                  # 8.19 0.10
+print(f"{limits.centre - 2 * limits.sd:.2f} {limits.centre + 2 * limits.sd:.2f}")  # 7.98 8.40
+print(f"{limits.centre - 3 * limits.sd:.2f} {limits.centre + 3 * limits.sd:.2f}")  # 7.88 8.50
 
 runs = [8.15, 8.27, 8.09, 8.24, 8.31, 8.33, 8.32, 8.36,
         8.18, 8.22, 8.12, 8.42, 8.20]
-print(westgard(runs, limits))                # run 8: 4_1s reject; run 12: warning
+chart = westgard(runs, limits)               # one row per run: z, each rule, status
+rules = ["1_2s", "1_3s", "2_2s", "R_4s", "4_1s", "10_x"]
+for i, row in chart.iterrows():
+    if row["status"] != "accept":
+        print(f"run {i + 1}:", ", ".join(r for r in rules if row[r]), row["status"])
+# run 8: 4_1s reject
+# run 12: 1_2s warning
 
 z = z_score(7.95, assigned=7.80, sigma_pt=0.20)
 print(z, classify(z))                        # 0.75 satisfactory
 ```
+
+??? example "Run it without labqc (numpy and scipy only)"
+
+    The same checks in plain Python. It tests only the two rules that fire
+    in this example (4<sub>1s</sub> and 1<sub>2s</sub>); a real chart
+    should check all six in the table above.
+
+    ```python
+    import numpy as np
+
+    baseline = np.array([8.21, 8.05, 8.33, 8.17, 8.28, 8.02, 8.24, 8.11, 8.36, 8.19,
+                         8.30, 8.08, 8.20, 8.13, 8.27, 8.04, 8.25, 8.15, 8.34, 8.10])
+    centre, sd = baseline.mean(), baseline.std(ddof=1)
+    print(f"centre {centre:.2f}, SD {sd:.2f}")                    # centre 8.19, SD 0.10
+    print(f"warning {centre - 2 * sd:.2f} to {centre + 2 * sd:.2f}, "
+          f"action {centre - 3 * sd:.2f} to {centre + 3 * sd:.2f}")
+    # warning 7.98 to 8.40, action 7.88 to 8.50
+
+    runs = np.array([8.15, 8.27, 8.09, 8.24, 8.31, 8.33, 8.32, 8.36,
+                     8.18, 8.22, 8.12, 8.42, 8.20])
+    z = (runs - centre) / sd
+    print(" ".join(f"{v:.2f}" for v in z))
+    # -0.39 0.76 -0.97 0.47 1.14 1.33 1.23 1.62 -0.11 0.28 -0.68 2.19 0.09
+
+    for i in range(len(z)):
+        last4 = z[max(0, i - 3): i + 1]
+        if len(last4) == 4 and (np.all(last4 > 1) or np.all(last4 < -1)):  # 4_1s
+            print(f"run {i + 1}: 4_1s, reject")
+        elif abs(z[i]) > 2:                                                 # 1_2s
+            print(f"run {i + 1}: 1_2s, warning")
+    # run 8: 4_1s, reject
+    # run 12: 1_2s, warning
+
+    z_pt = (7.95 - 7.80) / 0.20                # (lab - assigned) / SD for proficiency assessment
+    print(f"PT z = {z_pt:.2f}")                # PT z = 0.75
+    ```
 
 ## Common findings
 
@@ -186,7 +231,7 @@ print(z, classify(z))                        # 0.75 satisfactory
   and `pt_history`: score PT rounds and track them over time.
 - The labqc web app has [QC charts](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/QC_charts)
   and [Proficiency testing](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Proficiency_testing)
-  pages that do the same in the browser.
+  pages that do the same in the browser (the free app may take about 30 seconds to wake up).
 
 ## Related clauses
 

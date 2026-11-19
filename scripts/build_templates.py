@@ -11,6 +11,12 @@ Each source starts with metadata (Markdown front matter, or top-level YAML keys)
 
 Which clauses a template belongs to is set in data/clauses.yml, not here.
 
+After building, it packs every template with a README.txt into
+docs/downloads/iso17025-qms-starter-pack.zip, and writes the template count
+and zip size to templates/.build/pack.json for the MkDocs hook. Built files
+get fixed internal timestamps (SOURCE_DATE_EPOCH, or PACK_DATE below), so the
+pack only changes when a template does.
+
     python scripts/build_templates.py           # rebuild what changed
     python scripts/build_templates.py --force   # rebuild everything
 """
@@ -18,8 +24,13 @@ Which clauses a template belongs to is set in data/clauses.yml, not here.
 from __future__ import annotations
 
 import copy
+import io
+import json
+import os
 import re
 import sys
+import zipfile
+from datetime import datetime, timezone
 from pathlib import Path
 
 import yaml
@@ -29,6 +40,12 @@ SRC = ROOT / "templates" / "src"
 SHEETS = ROOT / "templates" / "sheets"
 OUT = ROOT / "docs" / "downloads"
 REFERENCE_DOCX = ROOT / "templates" / ".build" / "reference.docx"
+PACK = OUT / "iso17025-qms-starter-pack.zip"
+PACK_DATA = ROOT / "templates" / ".build" / "pack.json"
+CLAUSES = ROOT / "data" / "clauses.yml"
+# Timestamp written into every built file and zip entry, so rebuilding an
+# unchanged template gives identical bytes. SOURCE_DATE_EPOCH overrides it.
+PACK_DATE = datetime(2026, 1, 1, tzinfo=timezone.utc)
 
 SITE = "https://mantas123456.github.io/lab-accreditation-handbook/"
 FOOTER = (
@@ -390,11 +407,140 @@ def build_xlsx(template: dict, out: Path) -> None:
     wb.save(str(out))
 
 
+# ---------------------------------------------------------------- reproducible output
+
+
+def build_date() -> datetime:
+    epoch = os.environ.get("SOURCE_DATE_EPOCH")
+    return datetime.fromtimestamp(int(epoch), tz=timezone.utc) if epoch else PACK_DATE
+
+
+def _zip_time() -> tuple[int, int, int, int, int, int]:
+    return build_date().timetuple()[:6]
+
+
+def normalise_ooxml(path: Path) -> None:
+    """Give a .docx or .xlsx fixed entry timestamps and document dates.
+
+    Word and Excel files are zip archives. Pandoc and openpyxl stamp the
+    current time on every entry and in docProps/core.xml, so two builds of
+    the same source differ. This rewrites both with build_date().
+    """
+    stamp = build_date().strftime("%Y-%m-%dT%H:%M:%SZ")
+    with zipfile.ZipFile(path) as src:
+        entries = [(info, src.read(info)) for info in src.infolist()]
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as dst:
+        for info, data in entries:
+            if info.filename == "docProps/core.xml":
+                data = re.sub(
+                    rb"(<dcterms:(?:created|modified)[^>]*>)[^<]*(</dcterms:)",
+                    lambda m: m.group(1) + stamp.encode() + m.group(2),
+                    data,
+                )
+            out = zipfile.ZipInfo(info.filename, date_time=_zip_time())
+            out.compress_type = zipfile.ZIP_DEFLATED
+            out.external_attr = 0o644 << 16
+            dst.writestr(out, data, compresslevel=9)
+    path.write_bytes(buf.getvalue())
+
+
+# ---------------------------------------------------------------- template pack
+
+
+def _clauses_by_template() -> dict[str, list[str]]:
+    data = yaml.safe_load(CLAUSES.read_text(encoding="utf-8"))
+    out: dict[str, list[str]] = {}
+    for c in data["clauses"]:
+        for tid in c.get("templates", []):
+            out.setdefault(tid, []).append(f"{c['number']} {c['title']}")
+    return out
+
+
+def pack_readme(templates: list[dict]) -> str:
+    """README.txt for the zip: licence, credit, warning, and every file with its clauses."""
+    clauses = _clauses_by_template()
+    lines = [
+        "ISO/IEC 17025 QMS starter pack",
+        "Lab Accreditation Handbook",
+        "=" * 30,
+        "",
+        f"{len(templates)} editable Word and Excel templates for a small testing or",
+        "calibration lab working towards ISO/IEC 17025:2017 accreditation.",
+        "",
+        f"Guidance for every template: {SITE}",
+        f"All templates online: {SITE}template-library/",
+        "",
+        "ADAPT BEFORE USE",
+        "----------------",
+        "A template is a starting point. Make it match how your lab actually",
+        "works, and check it against your accreditation body's rules. An",
+        "assessor will notice a form copied without thought. This is not",
+        "official guidance; the standard and your accreditation body's",
+        "documents take priority.",
+        "",
+        "LICENCE",
+        "-------",
+        "Creative Commons Attribution 4.0 International (CC BY 4.0),",
+        "https://creativecommons.org/licenses/by/4.0/",
+        "You may use, adapt and share these templates, also commercially, if",
+        "you give credit. Suggested credit line:",
+        "",
+        f'  "Based on templates from the Lab Accreditation Handbook ({SITE}),',
+        '   CC BY 4.0."',
+        "",
+        "FILES",
+        "-----",
+    ]
+    for t in templates:
+        name = output_path(t).name
+        supports = "; ".join(clauses.get(t["id"], [])) or "preparing for assessment (Start here)"
+        lines += ["", name, f"  {t['title']} ({t['type']}, {'Word' if t['format'] == 'docx' else 'Excel'})",
+                  f"  {t['description']}", f"  Clauses: {supports}"]
+    return "\r\n".join(lines) + "\r\n"
+
+
+def pack_bytes(templates: list[dict]) -> bytes:
+    """The zip, built in memory: fixed file order, timestamps and permissions."""
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+        files = [("README.txt", pack_readme(templates).encode("utf-8"))]
+        files += [(output_path(t).name, output_path(t).read_bytes()) for t in templates]
+        for name, data in files:
+            info = zipfile.ZipInfo(name, date_time=_zip_time())
+            info.compress_type = zipfile.ZIP_DEFLATED
+            info.external_attr = 0o644 << 16
+            z.writestr(info, data, compresslevel=9)
+    return buf.getvalue()
+
+
+def write_pack(quiet: bool = False) -> dict:
+    """Write the zip and pack.json, only where their content changed."""
+    templates = sorted(catalog(), key=lambda t: output_path(t).name)
+    data = pack_bytes(templates)
+    if not PACK.exists() or PACK.read_bytes() != data:
+        PACK.write_bytes(data)
+        if not quiet:
+            print(f"packed {PACK.relative_to(ROOT)} ({len(templates)} templates, {len(data) // 1024} KB)")
+    info = {
+        "count": len(templates),
+        "zip": f"downloads/{PACK.name}",
+        "bytes": len(data),
+        "files": [output_path(t).name for t in templates],
+    }
+    text = json.dumps(info, indent=2) + "\n"
+    PACK_DATA.parent.mkdir(parents=True, exist_ok=True)
+    if not PACK_DATA.exists() or PACK_DATA.read_text(encoding="utf-8") != text:
+        PACK_DATA.write_text(text, encoding="utf-8")
+    return info
+
+
 # ---------------------------------------------------------------- driver
 
 
 def build(force: bool = False, quiet: bool = False) -> list[Path]:
-    """Build every template whose output is missing or older than its source or this script."""
+    """Build every template whose output is missing or older than its source or this script,
+    then refresh the zip pack."""
     OUT.mkdir(parents=True, exist_ok=True)
     script_time = Path(__file__).stat().st_mtime
     built = []
@@ -404,15 +550,17 @@ def build(force: bool = False, quiet: bool = False) -> list[Path]:
         if not stale:
             continue
         (build_docx if t["format"] == "docx" else build_xlsx)(t, out)
+        normalise_ooxml(out)
         built.append(out)
         if not quiet:
             print(f"built {out.relative_to(ROOT)}")
-    known = {output_path(t).name for t in catalog()}
+    known = {output_path(t).name for t in catalog()} | {PACK.name}
     for old in OUT.iterdir():
         if old.is_file() and old.name not in known:
             old.unlink()
             if not quiet:
                 print(f"removed {old.relative_to(ROOT)}")
+    write_pack(quiet=quiet)
     return built
 
 

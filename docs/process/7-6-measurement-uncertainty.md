@@ -39,6 +39,11 @@ variation and say how to present results. For those, the method's own
 precision data can carry much of the estimate, but you still need to show
 that your lab performs at least as well as the method claims.
 
+*Calibration labs:* you need an uncertainty for every calibration you issue,
+and your scope states your calibration and measurement capability (CMC),
+the smallest uncertainty any certificate may claim (see
+[testing labs and calibration labs](../start-here/how-to-use.md#testing-labs-and-calibration-labs)).
+
 ## How to do it in a small lab
 
 1. **Define exactly what you measure.** "Moisture" is not enough. Write
@@ -178,8 +183,53 @@ budget = [
 result = combine(budget, value=7.74)
 print(result.summary(relative=True))
 # u_c = 0.1162, v_eff = 17.0, k = 2.11, U (95%) = 0.2452 | u_c/|y| = 1.501%, U/|y| = 3.167%
-print(result.table)  # contributions, sorted largest first
+
+for row in result.table.itertuples():  # contributions, sorted largest first
+    print(f"{row.component}: {row.share_of_variance:.1%}")
+# Laboratory bias (PT history): 47.4%
+# Repeatability (mean of duplicate): 37.3%
+# Weighing hot (buoyancy residual): 8.9%
+# Drying temperature 105 ± 2 °C: 6.2%
+# Balance calibration: 0.2%
 ```
+
+??? example "Run it without labqc (numpy and scipy only)"
+
+    The same budget in plain Python, for a computer where you cannot
+    install labqc. Each source is first turned into a standard uncertainty:
+    rectangular limits are divided by √3, and the balance's *U* by its
+    *k* = 2.
+
+    ```python
+    import numpy as np
+    from scipy import stats
+
+    # source: (standard uncertainty in % moisture, degrees of freedom)
+    components = {
+        "Laboratory bias (PT history)":      (0.08, 5),
+        "Repeatability (mean of duplicate)": (0.071, 10),
+        "Weighing hot (buoyancy residual)":  (0.06 / np.sqrt(3), np.inf),
+        "Drying temperature 105 ± 2 °C":     (0.05 / np.sqrt(3), np.inf),
+        "Balance calibration":               (0.010 / 2, np.inf),
+    }
+    u = np.array([c[0] for c in components.values()])
+    dof = np.array([c[1] for c in components.values()])
+
+    u_c = np.sqrt(np.sum(u**2))               # combined standard uncertainty
+    v_eff = u_c**4 / np.sum(u**4 / dof)       # Welch-Satterthwaite (u**4/inf = 0)
+    k = stats.t.ppf(0.975, v_eff)             # about 95 % coverage
+    U = k * u_c
+    print(f"u_c = {u_c:.4f}, v_eff = {v_eff:.1f}, k = {k:.2f}, U = {U:.4f}, U/y = {U / 7.74:.2%}")
+    # u_c = 0.1162, v_eff = 17.0, k = 2.11, U = 0.2452, U/y = 3.17%
+
+    for name, share in zip(components, u**2 / u_c**2):
+        print(f"{name}: {share:.1%}")
+    # Laboratory bias (PT history): 47.4%
+    # Repeatability (mean of duplicate): 37.3%
+    # Weighing hot (buoyancy residual): 8.9%
+    # Drying temperature 105 ± 2 °C: 6.2%
+    # Balance calibration: 0.2%
+    ```
 
 ## Common findings
 
@@ -221,7 +271,7 @@ The spreadsheet uses the same calculation as `labqc.uncertainty.combine`, and th
 - [`labqc.uncertainty.monte_carlo`](https://mantas123456.github.io/lab-quality-toolkit/api/uncertainty/#labqc.uncertainty.monte_carlo):
   checks the result by simulation when the equation is strongly non-linear.
 - [The labqc web app, Uncertainty budget page](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Uncertainty_budget):
-  the same calculation in the browser, no Python needed.
+  the same calculation in the browser, no Python needed (the free app may take about 30 seconds to wake up).
 
 ## Related clauses
 

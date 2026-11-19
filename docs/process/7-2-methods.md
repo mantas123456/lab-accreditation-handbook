@@ -137,11 +137,18 @@ df = pd.DataFrame({
     "value": [0.48, 0.50, 0.52, 0.51, 0.47, 0.49, 0.50, 0.53, 0.51, 0.49],
 })
 ip = intermediate_precision(df)
-print(ip.sd_repeatability, ip.sd_intermediate, ip.p_value)   # 0.015 0.019 0.21
+print(ip.mean, ip.sd_repeatability, ip.sd_between, ip.sd_intermediate, ip.p_value)
+# 0.500 0.015 0.011 0.019 0.21
+print(f"{ip.sd_intermediate / ip.mean:.1%}")                 # 3.7%
 
 t = trueness([1.21, 1.25, 1.19, 1.24, 1.22, 1.26], crm_value=1.20, crm_u=0.03 / 2)
-print(t.bias, t.U_bias, t.passed)                            # 0.028 0.037 True
+print(t.mean, t.bias, t.recovery_percent, t.U_bias, t.passed)
+# 1.228 0.028 102 0.037 True
+print(t.p_value)                       # 0.047
 ```
+
+The last line is the simple t-test from the note above, which ignores the
+uncertainty of the certified value.
 
 ## Common findings
 
@@ -168,7 +175,7 @@ print(t.bias, t.U_bias, t.passed)                            # 0.028 0.037 True
 - [`labqc.validation.linearity`](https://mantas123456.github.io/lab-quality-toolkit/api/validation/#labqc.validation.linearity)
   and [`lod_loq`](https://mantas123456.github.io/lab-quality-toolkit/api/validation/#labqc.validation.lod_loq):
   for instrumental methods with a calibration line.
-- [The labqc web app, Method validation page](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Method_validation).
+- [The labqc web app, Method validation page](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Method_validation) (the free app may take about 30 seconds to wake up).
 
 ## Related clauses
 

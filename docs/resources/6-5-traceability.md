@@ -29,6 +29,11 @@ uncertainty at every step.
 - **Your accreditation body's traceability policy** followed. Many follow
   the ILAC policy on traceability (ILAC P10).
 
+*Calibration labs:* your own reference standards and calibration hierarchy
+are part of the chain the assessor follows, which is the main way this
+clause differs for you (see
+[testing labs and calibration labs](../start-here/how-to-use.md#testing-labs-and-calibration-labs)).
+
 ## How to do it in a small lab
 
 1. **Map the chain for each method.** List every input in the method's

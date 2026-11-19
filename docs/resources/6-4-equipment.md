@@ -109,7 +109,7 @@ needed. Everything is recorded in B-03's history.
 - [`labqc.control_charts.westgard`](https://mantas123456.github.io/lab-quality-toolkit/api/control_charts/#labqc.control_charts.westgard):
   apply control-chart rules to intermediate check results, so a slow drift
   shows before a check fails.
-- [The labqc web app, QC charts page](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/QC_charts).
+- [The labqc web app, QC charts page](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/QC_charts) (the free app may take about 30 seconds to wake up).
 
 ## Related clauses
 
