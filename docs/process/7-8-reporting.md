@@ -165,7 +165,12 @@ limit − *U*, and whether guarded acceptance gives a clear pass.
   call, with percentage of limit.
 - [`labqc.emissions.corrected_uncertainty`](https://mantas123456.github.io/lab-quality-toolkit/api/emissions/#labqc.emissions.corrected_uncertainty):
   uncertainty through the O<sub>2</sub> correction.
-- [The labqc web app, Emissions page](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Emissions) (the free app may take about 30 seconds to wake up).
+- [`labqc.conformity`](https://mantas123456.github.io/lab-quality-toolkit/api/conformity/): decision rules for a statement of conformity
+  (simple acceptance or a guard band, ILAC G8), with the probability of conformance and
+  suggested report wording.
+- The labqc web app opens [the boiler example](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Emissions?example=boiler) and
+  [a decision rule on a result near its limit](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Decision_rules?example=decision)
+  (the free app may take about 30 seconds to wake up).
 
 ## Related clauses
 

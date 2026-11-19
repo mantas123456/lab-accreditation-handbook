@@ -175,7 +175,14 @@ uncertainty of the certified value.
 - [`labqc.validation.linearity`](https://mantas123456.github.io/lab-quality-toolkit/api/validation/#labqc.validation.linearity)
   and [`lod_loq`](https://mantas123456.github.io/lab-quality-toolkit/api/validation/#labqc.validation.lod_loq):
   for instrumental methods with a calibration line.
-- [The labqc web app, Method validation page](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Method_validation) (the free app may take about 30 seconds to wake up).
+- [`labqc.outliers`](https://mantas123456.github.io/lab-quality-toolkit/api/outliers/): Grubbs and Cochran tests (ISO 5725-2) for
+  suspect replicates and laboratories.
+- [`labqc.comparison`](https://mantas123456.github.io/lab-quality-toolkit/api/comparison/): Bland-Altman, Passing-Bablok and Deming, to verify
+  a new method or analyser against the old one.
+- The labqc web app opens each of these with an example loaded:
+  [calibration and LOD/LOQ](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Method_validation?example=calibration),
+  [outlier tests](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Method_validation?example=outliers) and
+  [method comparison](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Method_validation?example=method-comparison) (the free app may take about 30 seconds to wake up).
 
 ## Related clauses
 

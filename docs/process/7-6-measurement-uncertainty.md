@@ -270,8 +270,11 @@ The spreadsheet uses the same calculation as `labqc.uncertainty.combine`, and th
   shows each source's share.
 - [`labqc.uncertainty.monte_carlo`](https://mantas123456.github.io/lab-quality-toolkit/api/uncertainty/#labqc.uncertainty.monte_carlo):
   checks the result by simulation when the equation is strongly non-linear.
-- [The labqc web app, Uncertainty budget page](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Uncertainty_budget):
-  the same calculation in the browser, no Python needed (the free app may take about 30 seconds to wake up).
+- [`labqc.topdown`](https://mantas123456.github.io/lab-quality-toolkit/api/topdown/): the top-down route (Nordtest TR 537), U from
+  control-sample results and PT or CRM bias, with no full budget.
+- The labqc web app opens [the moisture budget of this example](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Uncertainty_budget?example=moisture)
+  or [a top-down estimate from QC and PT data](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Uncertainty_budget?example=topdown)
+  in the browser, no Python needed (the free app may take about 30 seconds to wake up).
 
 ## Related clauses
 

@@ -229,9 +229,12 @@ print(z, classify(z))                        # 0.75 satisfactory
   sets the centre line and SD from a baseline.
 - [`labqc.proficiency.z_score`](https://mantas123456.github.io/lab-quality-toolkit/api/proficiency/)
   and `pt_history`: score PT rounds and track them over time.
-- The labqc web app has [QC charts](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/QC_charts)
-  and [Proficiency testing](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Proficiency_testing)
-  pages that do the same in the browser (the free app may take about 30 seconds to wake up).
+- The labqc web app does the same in the browser, with an example loaded:
+  [Westgard rules](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/QC_charts?example=westgard),
+  [CUSUM](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/QC_charts?example=cusum),
+  [all methods and levels at a glance](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/QC_overview?example=qc-overview),
+  [PT scores](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Proficiency_testing?example=pt-round) and
+  [PT history](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Proficiency_testing?example=pt-history) (the free app may take about 30 seconds to wake up).
 
 ## Related clauses
 

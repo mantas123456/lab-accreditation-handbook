@@ -12,7 +12,8 @@
 #   templates list of template ids: file names in templates/src or templates/sheets
 #   labqc     list of labqc links, or [] when no calculation is involved
 #               ref: Python name, linked to the labqc API reference
-#               app: page of the labqc web app (optional)
+#               app: page of the labqc web app, with ?example=<name> to open that
+#                    example loaded (optional)
 #               anchor: false to link the module page instead of the function
 #   related   list of related clause numbers
 #   status    planned | draft | examples-checked | reviewed
@@ -89,8 +90,10 @@ clauses:
     chapter: resources/6-4-equipment.md
     templates: [equipment-register, calibration-schedule]
     labqc:
+      - ref: labqc.equipment.drift
+        app: Equipment_drift?example=equipment-drift
       - ref: labqc.control_charts.westgard
-        app: QC_charts
+        app: QC_charts?example=westgard
     related: ["6.5", "7.7", "7.11"]
     status: draft
   - number: "6.5"
@@ -126,7 +129,11 @@ clauses:
     templates: [validation-plan-and-report]
     labqc:
       - ref: labqc.validation.linearity
-        app: Method_validation
+        app: Method_validation?example=calibration
+      - ref: labqc.outliers.grubbs
+        app: Method_validation?example=outliers
+      - ref: labqc.comparison.passing_bablok
+        app: Method_validation?example=method-comparison
       - ref: labqc.validation.intermediate_precision
       - ref: labqc.validation.trueness
       - ref: labqc.validation.lod_loq
@@ -163,7 +170,9 @@ clauses:
     templates: [uncertainty-budget]
     labqc:
       - ref: labqc.uncertainty.combine
-        app: Uncertainty_budget
+        app: Uncertainty_budget?example=moisture
+      - ref: labqc.topdown.combine_topdown
+        app: Uncertainty_budget?example=topdown
       - ref: labqc.uncertainty.type_a
       - ref: labqc.uncertainty.monte_carlo
     related: ["7.2", "7.7", "7.8", "6.5"]
@@ -175,10 +184,14 @@ clauses:
     templates: [pt-plan]
     labqc:
       - ref: labqc.control_charts.westgard
-        app: QC_charts
+        app: QC_charts?example=westgard
+      - ref: labqc.control_charts.qc_overview
+        app: QC_overview?example=qc-overview
       - ref: labqc.control_charts.limits_from_data
       - ref: labqc.proficiency.z_score
-        app: Proficiency_testing
+        app: Proficiency_testing?example=pt-round
+      - ref: labqc.proficiency.pt_history
+        app: Proficiency_testing?example=pt-history
         anchor: false
     related: ["7.2", "7.6", "7.10", "6.4"]
     status: examples-checked
@@ -188,11 +201,13 @@ clauses:
     chapter: process/7-8-reporting.md
     templates: [test-report-template]
     labqc:
+      - ref: labqc.conformity.decide
+        app: Decision_rules?example=decision
       - ref: labqc.emissions.correct_emission
-        app: Emissions
+        app: Emissions?example=boiler
       - ref: labqc.emissions.corrected_uncertainty
       - ref: labqc.uncertainty.combine
-        app: Uncertainty_budget
+        app: Uncertainty_budget?example=moisture
     related: ["7.6", "7.1", "7.5"]
     status: examples-checked
   - number: "7.9"

@@ -109,7 +109,11 @@ needed. Everything is recorded in B-03's history.
 - [`labqc.control_charts.westgard`](https://mantas123456.github.io/lab-quality-toolkit/api/control_charts/#labqc.control_charts.westgard):
   apply control-chart rules to intermediate check results, so a slow drift
   shows before a check fails.
-- [The labqc web app, QC charts page](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/QC_charts) (the free app may take about 30 seconds to wake up).
+- [`labqc.equipment.drift`](https://mantas123456.github.io/lab-quality-toolkit/api/equipment/#labqc.equipment.drift): drift per year
+  from successive calibration certificates, when the error is predicted to reach the
+  tolerance, and whether the calibration interval should change.
+- The labqc web app opens [an equipment drift example](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/Equipment_drift?example=equipment-drift)
+  and [intermediate checks on a QC chart](https://lab-quality-toolkit-3go33hyzzwjhwpktn8tles.streamlit.app/QC_charts?example=westgard) (the free app may take about 30 seconds to wake up).
 
 ## Related clauses
 
